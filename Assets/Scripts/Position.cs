@@ -28,7 +28,6 @@ public class Position {
             x = minX + (x - maxX);
         else
             x = newX;
-        Debug.Log(x);
     }
 
     public void SetPosition(float x, float y) {

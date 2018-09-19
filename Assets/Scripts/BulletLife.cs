@@ -12,6 +12,7 @@ public class BulletLife: MonoBehaviour {
     }
 
     public void Update() {
+        //delta time
         position.Translate(0, Speed);
     }
 

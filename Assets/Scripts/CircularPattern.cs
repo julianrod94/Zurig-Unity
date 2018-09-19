@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CircularPattern {
 
-	public static float radius = 5;
+	public static float radius = 10;
 	private static bool InCilinder = true;
 	
 	// Update is called once per frame

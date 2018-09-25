@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 	private static Vector3 _infinitum = new Vector3(0,0,10);
-	public float SpeedY;
 	public bool IsShooting;
 	public float ShootCooldownTime;
 
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		var x = _axis.GetAxis(axisName) * Time.deltaTime * GameConstants.Player.Speed;
-		
+		Debug.Log(_axis.GetAxis(axisName));
 		_position.Translate(x,0);
 	}
 

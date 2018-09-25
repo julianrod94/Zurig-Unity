@@ -10,12 +10,18 @@ public class GameConstants: MonoBehaviour {
         public static float Radius = 10;
     }
     
+    //Cilinder
+    public static class Cilinder {
+        public static float Speed = 8;
+    }
     
     //Player
     public static class Player {
         public static float Speed = 3;
         public static float JumpForce = 60;
-        public static float JumpTime = 0.35f;
+        public static float JumpTime = 0.5f;
+        
+        
     }
     
     private void Awake() {

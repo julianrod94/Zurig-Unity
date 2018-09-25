@@ -3,19 +3,12 @@ guid: a63e5e51a1b5d8d489b4e06419b15a82
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Collider
-    100002: Cylinder
-    100004: //RootNode
-    400000: Collider
-    400002: Cylinder
-    400004: //RootNode
+    100000: //RootNode
+    400000: //RootNode
     2100000: No Name
-    2300000: Collider
-    2300002: Cylinder
-    3300000: Collider
-    3300002: Cylinder
-    4300000: Collider
-    4300002: Cylinder
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cylinder
   externalObjects: {}
   materials:
     importMaterials: 1

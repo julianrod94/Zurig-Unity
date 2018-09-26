@@ -22,10 +22,9 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		var x = _axis.GetAxis(axisName) * Time.deltaTime * GameConstants.Player.Speed;
-		Debug.Log(_axis.GetAxis(axisName));
 		_position.Translate(x,0);
 	}
-
+	
 	private void Shoot() {
 		if(!IsShooting) { return; }
 		BulletManager.Instance.GenerateBullet(_position, Quaternion.identity);

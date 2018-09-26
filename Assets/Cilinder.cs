@@ -15,6 +15,8 @@ public class Cilinder : MonoBehaviour {
 	public float Difficulty;
 
 	private MeshRenderer[] renderers;
+	
+	private bool _isFading = false;
 
 	private void Awake() {
 		renderers = GetComponentsInChildren<MeshRenderer>();
@@ -45,6 +47,10 @@ public class Cilinder : MonoBehaviour {
 		transform.Translate(0,0,-GameConstants.Cilinder.Speed * Time.deltaTime);
 
 		if (transform.position.z < Player.transform.position.z) {
+			_isFading = true;
+		}
+
+		if (_isFading) {
 			foreach(var render in renderers) {
 				if (render.material.color.a.Equals(1)) {
 					StandardShaderUtils.ChangeRenderMode(render.material, StandardShaderUtils.BlendMode.Transparent);
@@ -58,6 +64,19 @@ public class Cilinder : MonoBehaviour {
 					Destroy(gameObject);
 				}
 			}
-		} 
+		}
+	}
+
+	
+	void OnCollisionEnter(Collision collision) {
+		Explode();
+		// Now do whatever you need with myCollider.
+		// (If multiple colliders were involved in the collision, 
+		// you can find them all by iterating through the contacts)
+	}
+	
+	void Explode() {
+		GetComponent<Animator>().SetTrigger("Explode");
+		_isFading = true;
 	}
 }

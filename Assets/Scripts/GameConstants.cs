@@ -19,7 +19,7 @@ public class GameConstants: MonoBehaviour {
     public static class Player {
         public static float Speed = 3;
         public static float JumpForce = 60;
-        public static float JumpTime = 0.5f;
+        public static float JumpTime = 1f;
         
         
     }

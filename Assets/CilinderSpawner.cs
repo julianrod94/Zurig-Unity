@@ -5,6 +5,7 @@ using UnityEngine;
 public class CilinderSpawner : MonoBehaviour {
 
 	public GameObject cilinder;
+	public float SpawnRate = 3;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,7 +15,7 @@ public class CilinderSpawner : MonoBehaviour {
 	IEnumerator Spawn() {
 		while (true) {
 			Instantiate(cilinder, transform.position, transform.rotation);
-			yield return new WaitForSeconds(2);
+			yield return new WaitForSeconds(SpawnRate);
 		}
 	}
 }

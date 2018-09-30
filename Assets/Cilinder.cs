@@ -47,7 +47,7 @@ public class Cilinder : MonoBehaviour {
 		transform.Translate(0,0,-GameConstants.Cilinder.Speed * Time.deltaTime);
 
 		if (transform.position.z < Player.transform.position.z) {
-			_isFading = true;
+			startFading();
 		}
 
 		if (_isFading) {
@@ -57,7 +57,7 @@ public class Cilinder : MonoBehaviour {
 				}
 				
 				var materialColor = render.material.color;
-				materialColor.a = render.material.color.a - Time.deltaTime;
+				materialColor.a = render.material.color.a - 3*Time.deltaTime;
 				render.material.color = materialColor;
 
 				if (materialColor.a <= 0) {
@@ -78,5 +78,22 @@ public class Cilinder : MonoBehaviour {
 	void Explode() {
 		GetComponent<Animator>().SetTrigger("Explode");
 		_isFading = true;
+	}
+
+	private void startFading() {
+		_isFading = true;
+//		foreach (var go in halfCilinders) {
+//			foreach (var child in go.GetComponentsInChildren<Transform>()) {
+//				if(child.gameObject == go) continue;
+//				child.gameObject.SetActive(false);
+//			}
+//		}
+//		
+//		foreach (var go in cilinderParts) {
+//			foreach (var child in go.GetComponentsInChildren<Transform>()) {
+//				if(child.gameObject == go) continue;
+//				child.gameObject.SetActive(false);
+//			}
+//		}
 	}
 }

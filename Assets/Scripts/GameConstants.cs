@@ -12,7 +12,7 @@ public class GameConstants: MonoBehaviour {
     
     //Cilinder
     public static class Cilinder {
-        public static float Speed = 8;
+        public static float Speed = 80;
     }
     
     //Player

@@ -55,6 +55,7 @@ using UnityEngine;
 		
 		public void playFlyOverCilinderSound()
 		{
+			GetComponent<AudioSource>().volume = 0.1f;
 			GetComponent<AudioSource>().PlayOneShot(spaceShipTroughCilinderSound);
 		}
 	

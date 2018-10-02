@@ -49,6 +49,11 @@ public class Cilinder : MonoBehaviour {
 		if (transform.position.z < Player.transform.position.z) {
 			startFading();
 		}
+		
+		if (transform.position.z - Player.transform.position.z < 0.05 ) {
+			AudioManager.Instance.playFlyOverCilinderSound();
+		}
+		
 
 		if (_isFading) {
 			foreach(var render in renderers) {

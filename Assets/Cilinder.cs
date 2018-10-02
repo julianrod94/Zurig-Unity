@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Cilinder : MonoBehaviour {
 
-	public GameObject Player;
+	private GameObject Player;
+
+	public GameObject shield;
 	
 	public GameObject MiddleCilinder;
 
 	public GameObject[] halfCilinders;
 
-	public GameObject[] cilinderParts;
+	public EigthCilinder[] cilinderParts;
 
 	public float Difficulty;
 
@@ -26,13 +28,20 @@ public class Cilinder : MonoBehaviour {
 	void Start () {
 		Player = GameObject.FindWithTag("Player");
 		foreach (var go in cilinderParts) {
-			if (Random.value < 0.5f) {
-				go.SetActive(false);
+			if (Random.value < GameConstants.Cilinder.CilinderDensity) {
+				if (Random.value < GameConstants.Cilinder.CilinderShieldOdds) {
+					var instance = Instantiate(shield, go.spawner.transform);
+					instance.transform.parent = transform;
+					var lp = instance.transform.position;
+					instance.transform.localPosition = new Vector3(lp.x, lp.y, 0);
+					instance.transform.localScale = Vector3.one*3;
+				}
+				go.gameObject.SetActive(false);
 			} 
 		}
 		
 		foreach (var go in halfCilinders) {
-			if (Random.value < 0.5f) {
+			if (Random.value < GameConstants.Cilinder.CilinderDensity) {
 				go.SetActive(false);
 			} 
 		}
@@ -66,14 +75,6 @@ public class Cilinder : MonoBehaviour {
 			}
 		}
 	}
-
-	
-	void OnCollisionEnter(Collision collision) {
-		Explode();
-		// Now do whatever you need with myCollider.
-		// (If multiple colliders were involved in the collision, 
-		// you can find them all by iterating through the contacts)
-	}
 	
 	void Explode() {
 		GetComponent<Animator>().SetTrigger("Explode");
@@ -82,18 +83,5 @@ public class Cilinder : MonoBehaviour {
 
 	private void startFading() {
 		_isFading = true;
-//		foreach (var go in halfCilinders) {
-//			foreach (var child in go.GetComponentsInChildren<Transform>()) {
-//				if(child.gameObject == go) continue;
-//				child.gameObject.SetActive(false);
-//			}
-//		}
-//		
-//		foreach (var go in cilinderParts) {
-//			foreach (var child in go.GetComponentsInChildren<Transform>()) {
-//				if(child.gameObject == go) continue;
-//				child.gameObject.SetActive(false);
-//			}
-//		}
 	}
 }

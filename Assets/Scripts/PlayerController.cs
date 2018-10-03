@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
+		
+		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)) {
+			AudioManager.Instance.playMoveSound();
+		}
+		
 		if (GameManager.Instance.State != GameState.Playing) {
 			_position.Translate(Time.deltaTime,0);
 			return;

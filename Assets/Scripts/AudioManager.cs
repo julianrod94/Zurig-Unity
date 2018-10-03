@@ -5,9 +5,9 @@ using UnityEngine;
 	public class AudioManager : MonoBehaviour
 	{
 		[SerializeField]
-		private AudioClip spaceShipEngineSound;
-		[SerializeField]
 		private AudioClip spaceShipJumpSound;
+		[SerializeField]
+		private AudioClip spaceShipBoostSound;
 		[SerializeField]
 		private AudioClip moveSpaceShipSound;
 		[SerializeField]
@@ -19,7 +19,6 @@ using UnityEngine;
 		[SerializeField]
 		private AudioClip mainTheme;
 
-		private AudioSource spaceShipEngineLoop;
 		private AudioSource mainThemeLoop;
 		
 		private bool isPlayingMainLoop = false;
@@ -29,11 +28,7 @@ using UnityEngine;
 			mainThemeLoop.loop = true;
 			mainThemeLoop.clip = mainTheme;
 			
-			spaceShipEngineLoop = GetComponent<AudioSource>();
-			spaceShipEngineLoop.loop = true;
-			spaceShipEngineLoop.clip = spaceShipEngineSound;
 			playMainTheme();
-			playSpaceShipEngine();
 		}
 		
 		private static AudioManager _instance = null;
@@ -52,7 +47,7 @@ using UnityEngine;
 
 		public void playBrokenCilinderSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(brokenCilinderSound, 0.2f);
+			GetComponent<AudioSource>().PlayOneShot(brokenCilinderSound, 1f);
 		}
 		
 		public void playFlyOverCilinderSound()
@@ -65,6 +60,11 @@ using UnityEngine;
 			GetComponent<AudioSource>().PlayOneShot(spaceShipJumpSound, 0.5f);
 		}
 		
+		public void playBoostSound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(spaceShipBoostSound, 0.5f);
+		}
+		
 		public void playMoveSound()
 		{
 			GetComponent<AudioSource>().PlayOneShot(moveSpaceShipSound, 1f);
@@ -72,7 +72,7 @@ using UnityEngine;
 		
 		public void playShieldSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(shieldSound, 1f);
+			GetComponent<AudioSource>().PlayOneShot(shieldSound, 0.5f);
 		}
 
 		public void playMainTheme()
@@ -82,16 +82,6 @@ using UnityEngine;
 			isPlayingMainLoop = true;
 		}
 
-		public void playSpaceShipEngine()
-		{
-			spaceShipEngineLoop.Play();
-		}
-
-		public void stopSpaceShipEngine()
-		{
-			spaceShipEngineLoop.Stop();
-		}
-		
 		public void stopMainTheme() {
 			mainThemeLoop.Stop();
 			isPlayingMainLoop = false;

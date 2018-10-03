@@ -18,6 +18,8 @@ using UnityEngine;
 		private AudioClip shieldSound;
 		[SerializeField]
 		private AudioClip mainTheme;
+		[SerializeField]
+		private AudioClip buttonSound;
 
 		private AudioSource mainThemeLoop;
 		
@@ -75,7 +77,11 @@ using UnityEngine;
 		{
 			GetComponent<AudioSource>().PlayOneShot(spaceShipDesintegrationSound, 1f);
 		}
-
+		
+		public void playButtonSound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(buttonSound, 1f);	
+		}
 		
 		public void playMainTheme()
 		{

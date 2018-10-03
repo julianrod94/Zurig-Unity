@@ -27,6 +27,7 @@ using UnityEngine;
 			mainThemeLoop = GetComponent<AudioSource>();
 			mainThemeLoop.loop = true;
 			mainThemeLoop.clip = mainTheme;
+			mainThemeLoop.volume = 0.3f;
 			
 			playMainTheme();
 		}
@@ -52,12 +53,12 @@ using UnityEngine;
 		
 		public void playFlyOverCilinderSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(spaceShipTroughCilinderSound, 0.03f);
+			GetComponent<AudioSource>().PlayOneShot(spaceShipTroughCilinderSound, 0.05f);
 		}
 
 		public void playJumpSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(spaceShipJumpSound, 0.5f);
+			GetComponent<AudioSource>().PlayOneShot(spaceShipJumpSound, 0.6f);
 		}
 		
 		public void playBoostSound()

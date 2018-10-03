@@ -53,7 +53,6 @@ public class Cilinder : MonoBehaviour {
 		if (transform.position.z - Player.transform.position.z < 0.05 ) {
 			AudioManager.Instance.playFlyOverCilinderSound();
 		}
-		
 
 		if (_isFading) {
 			foreach(var render in renderers) {
@@ -80,7 +79,9 @@ public class Cilinder : MonoBehaviour {
 		// you can find them all by iterating through the contacts)
 	}
 	
-	void Explode() {
+	void Explode()
+	{
+		AudioManager.Instance.playBrokenCilinderSound();
 		GetComponent<Animator>().SetTrigger("Explode");
 		_isFading = true;
 	}

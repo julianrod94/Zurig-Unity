@@ -50,15 +50,14 @@ using UnityEngine;
 
 		public void playBrokenCilinderSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(brokenCilinderSound);
+			GetComponent<AudioSource>().PlayOneShot(brokenCilinderSound, 0.2f);
 		}
 		
 		public void playFlyOverCilinderSound()
 		{
-			GetComponent<AudioSource>().volume = 0.1f;
-			GetComponent<AudioSource>().PlayOneShot(spaceShipTroughCilinderSound);
+			GetComponent<AudioSource>().PlayOneShot(spaceShipTroughCilinderSound, 0.03f);
 		}
-	
+		
 		public void playMainTheme()
 		{
 			if (isPlayingMainLoop) return;

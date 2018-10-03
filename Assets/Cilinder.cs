@@ -20,6 +20,8 @@ public class Cilinder : MonoBehaviour {
 	
 	private bool _isFading = false;
 
+	public bool hasBeenHit = false;
+
 	private void Awake() {
 		renderers = GetComponentsInChildren<MeshRenderer>();
 	}
@@ -28,27 +30,27 @@ public class Cilinder : MonoBehaviour {
 	void Start () {
 		Player = GameObject.FindWithTag("Player");
 		foreach (var go in cilinderParts) {
-			if (Random.value < GameConstants.Cilinder.CilinderDensity) {
+			if (Random.value > GameConstants.Cilinder.CilinderDensity) {
 				if (Random.value < GameConstants.Cilinder.CilinderShieldOdds) {
 					var instance = Instantiate(shield, go.spawner.transform);
 					instance.transform.parent = transform;
 					var lp = instance.transform.position;
-					instance.transform.localPosition = new Vector3(lp.x, lp.y, 0);
-					instance.transform.localScale = Vector3.one*3;
+					instance.transform.localPosition = new Vector3(lp.x, lp.y, 10f);
+					instance.transform.localScale = Vector3.one*4;
 				}
 				go.gameObject.SetActive(false);
 			} 
 		}
 		
 		foreach (var go in halfCilinders) {
-			if (Random.value < GameConstants.Cilinder.CilinderDensity) {
+			if (Random.value > GameConstants.Cilinder.CilinderDensity) {
 				go.SetActive(false);
 			} 
 		}
 		
 		
 		MiddleCilinder.transform.Rotate(0,0,Random.value*360);
-		transform.Rotate(0,0,Random.value*360);
+		transform.Rotate(0,0,0);
 	}
 	
 	// Update is called once per frame
@@ -76,7 +78,7 @@ public class Cilinder : MonoBehaviour {
 		}
 	}
 	
-	void Explode() {
+	public void Explode() {
 		GetComponent<Animator>().SetTrigger("Explode");
 		_isFading = true;
 	}

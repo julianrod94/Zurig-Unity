@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 	private static Vector3 _infinitum = new Vector3(0,0,10);
@@ -43,11 +44,21 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision other) {
-		Debug.Log(other.gameObject.tag);
+		Debug.Log(other.gameObject);
 		if (other.gameObject.CompareTag("Cilinder")) {
-			//Destroy ship
+			var cilinder = other.gameObject.GetComponentInParent<Cilinder>();
+			if(cilinder.hasBeenHit) { return; }
+
+			cilinder.hasBeenHit = true;
+			if (hasShield) {
+				TurnShiled(false);
+				cilinder.Explode();
+			} else {
+				SceneManager.LoadScene(0);
+			}
 		} else if (other.gameObject.CompareTag("Shield")) {
 			TurnShiled(true);
+			Destroy(other.gameObject);
 		}
 	}
 }

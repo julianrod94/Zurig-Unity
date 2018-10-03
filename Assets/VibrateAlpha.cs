@@ -14,7 +14,7 @@ public class VibrateAlpha : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		var materialColor = renderer.material.color;
-		materialColor.a = (float) (Mathf.Cos(10*Time.time)*0.15 + 0.4);
+		materialColor.a = (float) (Mathf.Cos(5*Time.time)*0.05 + 0.2);
 		renderer.material.color = materialColor;
 	}
 }

@@ -7,6 +7,7 @@ public class Cilinder : MonoBehaviour {
 	private GameObject Player;
 
 	public GameObject shield;
+	public GameObject boost;
 	
 	public GameObject MiddleCilinder;
 
@@ -35,7 +36,13 @@ public class Cilinder : MonoBehaviour {
 					var instance = Instantiate(shield, go.spawner.transform);
 					instance.transform.parent = transform;
 					var lp = instance.transform.position;
-					instance.transform.localPosition = new Vector3(lp.x, lp.y, 10f);
+					instance.transform.localPosition = new Vector3(lp.x, lp.y, 5f);
+					instance.transform.localScale = Vector3.one*4;
+				} else if (Random.value < GameConstants.Cilinder.BoostOdds) {
+					var instance = Instantiate(boost, go.spawner.transform);
+					instance.transform.parent = transform;
+					var lp = instance.transform.position;
+					instance.transform.localPosition = new Vector3(lp.x, lp.y, 5f);
 					instance.transform.localScale = Vector3.one*4;
 				}
 				go.gameObject.SetActive(false);

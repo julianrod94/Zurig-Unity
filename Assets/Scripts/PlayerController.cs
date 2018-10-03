@@ -14,7 +14,9 @@ public class PlayerController : MonoBehaviour {
 	private Position _position;
 	private Cooldown _shootCD;
 	private bool hasShield;
-	
+	private bool _boosting;
+	private bool _invulnerable;
+
 	private const String axisName = "Horizontal";
 
 	void Awake () {
@@ -35,6 +37,14 @@ public class PlayerController : MonoBehaviour {
 			case GameState.Score:
 				return;
 			case GameState.Playing:
+				if (_boosting) {
+					Time.timeScale = Mathf.Clamp(Time.timeScale + Time.deltaTime * 10f,1f, 6f);
+				} else {
+					Time.timeScale = Mathf.Clamp(Time.timeScale - Time.deltaTime * 3,1f, 10f);
+				}
+		
+				SetInvulnerable(Time.timeScale > 1f);
+
 				var x = _axis.GetAxis(axisName) * Time.deltaTime * GameConstants.Player.Speed;
 				_position.Translate(x,0);
 				return;
@@ -53,13 +63,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision other) {
-		Debug.Log(other.gameObject);
 		if (other.gameObject.CompareTag("Cilinder")) {
 			var cilinder = other.gameObject.GetComponentInParent<Cilinder>();
 			if(cilinder.hasBeenHit) { return; }
 
 			cilinder.hasBeenHit = true;
-			if (hasShield) {
+
+			Debug.Log(_invulnerable);
+			if (_invulnerable) {
+				cilinder.Explode();
+			} else if (hasShield) {
 				TurnShiled(false);
 				cilinder.Explode();
 			} else {
@@ -69,6 +82,24 @@ public class PlayerController : MonoBehaviour {
 			AudioManager.Instance.playShieldSound();
 			TurnShiled(true);
 			Destroy(other.gameObject);
+		} else if (other.gameObject.CompareTag("Boost")) {
+			StartCoroutine(Boost());
+			Destroy(other.gameObject);
+		}
+	}
+
+	void SetInvulnerable(bool isGod) {
+		_invulnerable = isGod;
+		if (isGod) {
+			PlayerShield.SetActive(true);
+		}
+	}
+
+	IEnumerator Boost() {
+		if (!_boosting) {
+			_boosting = true;
+			yield return new WaitForSeconds(10);
+			_boosting = false;
 		}
 	}
 }

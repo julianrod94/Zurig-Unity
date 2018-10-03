@@ -2795,6 +2795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: {fileID: 1300404387144438, guid: 639ebf5a8b3aa004c83e8ef9c15a5248, type: 2}
+  boost: {fileID: 1774905630567344, guid: 31fdbdee503715847826288ae0fb5d96, type: 2}
   MiddleCilinder: {fileID: 1924075863626082}
   halfCilinders:
   - {fileID: 1723398859956504}

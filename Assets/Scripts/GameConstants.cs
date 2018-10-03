@@ -14,7 +14,8 @@ public class GameConstants: MonoBehaviour {
     public static class Cilinder {
         public static float Speed = 80;
         public static float CilinderDensity = 0.5f;
-        public static float CilinderShieldOdds = 0.02f;
+        public static float CilinderShieldOdds = 0.05f;
+        public static float BoostOdds = 0.03f;
     }
     
     //Player

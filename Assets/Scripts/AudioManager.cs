@@ -9,8 +9,6 @@ using UnityEngine;
 		[SerializeField]
 		private AudioClip spaceShipBoostSound;
 		[SerializeField]
-		private AudioClip moveSpaceShipSound;
-		[SerializeField]
 		private AudioClip spaceShipTroughCilinderSound;
 		[SerializeField]
 		private AudioClip spaceShipDesintegrationSound;
@@ -66,11 +64,6 @@ using UnityEngine;
 		public void playBoostSound()
 		{
 			GetComponent<AudioSource>().PlayOneShot(spaceShipBoostSound, 0.5f);
-		}
-		
-		public void playMoveSound()
-		{
-			GetComponent<AudioSource>().PlayOneShot(moveSpaceShipSound, 1f);
 		}
 		
 		public void playShieldSound()

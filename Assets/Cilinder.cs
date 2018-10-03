@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class Cilinder : MonoBehaviour {
 
-	public GameObject Player;
+	private GameObject Player;
+
+	public GameObject shield;
 	
 	public GameObject MiddleCilinder;
 
 	public GameObject[] halfCilinders;
 
-	public GameObject[] cilinderParts;
+	public EigthCilinder[] cilinderParts;
 
 	public float Difficulty;
 
 	private MeshRenderer[] renderers;
 	
 	private bool _isFading = false;
+
+	public bool hasBeenHit = false;
 
 	private void Awake() {
 		renderers = GetComponentsInChildren<MeshRenderer>();
@@ -26,20 +30,27 @@ public class Cilinder : MonoBehaviour {
 	void Start () {
 		Player = GameObject.FindWithTag("Player");
 		foreach (var go in cilinderParts) {
-			if (Random.value < 0.5f) {
-				go.SetActive(false);
+			if (Random.value > GameConstants.Cilinder.CilinderDensity) {
+				if (Random.value < GameConstants.Cilinder.CilinderShieldOdds) {
+					var instance = Instantiate(shield, go.spawner.transform);
+					instance.transform.parent = transform;
+					var lp = instance.transform.position;
+					instance.transform.localPosition = new Vector3(lp.x, lp.y, 10f);
+					instance.transform.localScale = Vector3.one*4;
+				}
+				go.gameObject.SetActive(false);
 			} 
 		}
 		
 		foreach (var go in halfCilinders) {
-			if (Random.value < 0.5f) {
+			if (Random.value > GameConstants.Cilinder.CilinderDensity) {
 				go.SetActive(false);
 			} 
 		}
 		
 		
 		MiddleCilinder.transform.Rotate(0,0,Random.value*360);
-		transform.Rotate(0,0,Random.value*360);
+		transform.Rotate(0,0,0);
 	}
 	
 	// Update is called once per frame
@@ -70,36 +81,15 @@ public class Cilinder : MonoBehaviour {
 			}
 		}
 	}
-
 	
-	void OnCollisionEnter(Collision collision) {
-		Explode();
-		// Now do whatever you need with myCollider.
-		// (If multiple colliders were involved in the collision, 
-		// you can find them all by iterating through the contacts)
-	}
-	
-	void Explode()
+	public void Explode()
 	{
 		AudioManager.Instance.playBrokenCilinderSound();
-		GetComponent<Animator>().SetTrigger("Explode");
+ 		GetComponent<Animator>().SetTrigger("Explode");
 		_isFading = true;
 	}
 
 	private void startFading() {
 		_isFading = true;
-//		foreach (var go in halfCilinders) {
-//			foreach (var child in go.GetComponentsInChildren<Transform>()) {
-//				if(child.gameObject == go) continue;
-//				child.gameObject.SetActive(false);
-//			}
-//		}
-//		
-//		foreach (var go in cilinderParts) {
-//			foreach (var child in go.GetComponentsInChildren<Transform>()) {
-//				if(child.gameObject == go) continue;
-//				child.gameObject.SetActive(false);
-//			}
-//		}
 	}
 }

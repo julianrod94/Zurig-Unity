@@ -57,7 +57,17 @@ using UnityEngine;
 		{
 			GetComponent<AudioSource>().PlayOneShot(spaceShipTroughCilinderSound, 0.03f);
 		}
+
+		public void playJumpSound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(spaceShipJumpSound, 0.5f);
+		}
 		
+		public void playMoveSound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(moveSpaceShipSound, 1f);
+		}
+
 		public void playMainTheme()
 		{
 			if (isPlayingMainLoop) return;

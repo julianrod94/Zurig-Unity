@@ -39,6 +39,7 @@ public class PlayerJump : MonoBehaviour {
 	
 	private void Jump() {
 		if (_isJumping) return;
+		AudioManager.Instance.playJumpSound();
 		_isJumping = true;
 		_lastJumped = Time.time;
 		_speedY = GameConstants.Player.JumpForce;

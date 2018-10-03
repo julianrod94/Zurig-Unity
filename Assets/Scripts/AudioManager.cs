@@ -13,6 +13,8 @@ using UnityEngine;
 		[SerializeField]
 		private AudioClip spaceShipTroughCilinderSound;
 		[SerializeField]
+		private AudioClip spaceShipDesintegrationSound;
+		[SerializeField]
 		private AudioClip brokenCilinderSound;
 		[SerializeField]
 		private AudioClip shieldSound;
@@ -76,6 +78,12 @@ using UnityEngine;
 			GetComponent<AudioSource>().PlayOneShot(shieldSound, 0.5f);
 		}
 
+		public void playDesintegrationSound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(spaceShipDesintegrationSound, 1f);
+		}
+
+		
 		public void playMainTheme()
 		{
 			if (isPlayingMainLoop) return;

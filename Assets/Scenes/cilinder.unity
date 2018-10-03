@@ -4870,6 +4870,8 @@ MonoBehaviour:
   moveSpaceShipSound: {fileID: 0}
   spaceShipTroughCilinderSound: {fileID: 8300000, guid: 1d8ee0de6964f4bdfb2fe0c2cab9c404,
     type: 3}
+  spaceShipDesintegrationSound: {fileID: 8300000, guid: 599bdd23e7c744005aa38ef35152f824,
+    type: 3}
   brokenCilinderSound: {fileID: 8300000, guid: 0634d448eae8b415a8c6b2c217d4e394, type: 3}
   shieldSound: {fileID: 8300000, guid: ab16d20cb07734d2f8a488fe1c18bdbe, type: 3}
   mainTheme: {fileID: 8300000, guid: 0cf098e4c6df84766ad4bf60e10b2749, type: 3}

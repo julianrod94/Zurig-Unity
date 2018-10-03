@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour {
 				SceneManager.LoadScene(0);
 			}
 		} else if (other.gameObject.CompareTag("Shield")) {
+			AudioManager.Instance.playShieldSound();
 			TurnShiled(true);
 			Destroy(other.gameObject);
 		}

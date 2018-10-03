@@ -4871,6 +4871,7 @@ MonoBehaviour:
   spaceShipTroughCilinderSound: {fileID: 8300000, guid: 1d8ee0de6964f4bdfb2fe0c2cab9c404,
     type: 3}
   brokenCilinderSound: {fileID: 8300000, guid: 0634d448eae8b415a8c6b2c217d4e394, type: 3}
+  shieldSound: {fileID: 8300000, guid: ab16d20cb07734d2f8a488fe1c18bdbe, type: 3}
   mainTheme: {fileID: 0}
 --- !u!82 &448707863
 AudioSource:

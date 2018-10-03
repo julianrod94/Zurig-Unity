@@ -15,6 +15,8 @@ using UnityEngine;
 		[SerializeField]
 		private AudioClip brokenCilinderSound;
 		[SerializeField]
+		private AudioClip shieldSound;
+		[SerializeField]
 		private AudioClip mainTheme;
 
 		private AudioSource spaceShipEngineLoop;
@@ -66,6 +68,11 @@ using UnityEngine;
 		public void playMoveSound()
 		{
 			GetComponent<AudioSource>().PlayOneShot(moveSpaceShipSound, 1f);
+		}
+		
+		public void playShieldSound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(shieldSound, 1f);
 		}
 
 		public void playMainTheme()

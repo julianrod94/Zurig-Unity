@@ -14,7 +14,9 @@ public class CilinderSpawner : MonoBehaviour {
 
 	IEnumerator Spawn() {
 		while (true) {
-			var nCil2 = Instantiate(cilinder, transform.position, transform.rotation);
+			if (GameManager.Instance.State == GameState.Playing) {
+				Instantiate(cilinder, transform.position, transform.rotation);
+			}
 			yield return new WaitForSeconds(SpawnRate);
 		}
 	}

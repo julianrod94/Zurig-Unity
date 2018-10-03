@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
+		if (GameManager.Instance.State != GameState.Playing) {
+			_position.Translate(Time.deltaTime,0);
+			return;
+		}
 		var x = _axis.GetAxis(axisName) * Time.deltaTime * GameConstants.Player.Speed;
 		_position.Translate(x,0);
 	}

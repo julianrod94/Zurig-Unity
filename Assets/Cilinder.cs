@@ -62,10 +62,11 @@ public class Cilinder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameManager.Instance.State != GameState.Playing) {
-			gameObject.SetActive(false); 
+		if (GameManager.Instance.State != GameState.Playing && GameManager.Instance.State != GameState.Pause) {
+			Destroy(gameObject);
 			return;
 		}
+		
 		transform.Translate(0,0,-GameConstants.Cilinder.Speed * Time.deltaTime);
 
 		if (transform.position.z < Player.transform.position.z) {

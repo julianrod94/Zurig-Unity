@@ -31,12 +31,19 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update () {
 		switch (GameManager.Instance.State) {
+			case GameState.Pause:
+				Time.timeScale = 0;
+				if (Input.GetKeyDown(KeyCode.P)) {
+					GameManager.Instance.TogglePause();
+				}
+				return;
 			case GameState.Idle:
 				_position.Translate(Time.deltaTime,0);
 				return;
 			case GameState.Score:
 				return;
 			case GameState.Playing:
+				
 				if (Input.GetKeyDown(KeyCode.P)) {
 					GameManager.Instance.TogglePause();
 				}

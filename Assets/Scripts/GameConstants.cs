@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameConstants: MonoBehaviour {
 
-    public float DifficultyLevel = 0f;
+    public float DifficultyLevel = 0.001f;
     private static GameConstants _instance = null;
     public static GameConstants Instance
     {

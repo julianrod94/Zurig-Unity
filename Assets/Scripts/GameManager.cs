@@ -40,6 +40,7 @@ public class GameManager: MonoBehaviour{
         var tempTS = Time.timeScale;
         State = _prevState;
         Time.timeScale = _prevTS;
+        Debug.Log("TimeScale" + Time.timeScale);
         _prevState = temp;
         _prevTS = tempTS;
     }

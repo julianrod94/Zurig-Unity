@@ -1,15 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState { Idle, Playing,Pause, Score }
 public class GameManager: MonoBehaviour{
     
     public GameState State = GameState.Idle;
     public float Score;
+    public Text ScoreText;
+    public Text FinalScore;
     public GameObject player;
     public ParticleSystem shipAce;
     public ParticleSystem explosion;
     private float _prevTS = 0;
     private GameState _prevState = GameState.Pause;
+    private int _showScoreDelta = 0;
 
     public static GameManager Instance;
 
@@ -21,6 +25,11 @@ public class GameManager: MonoBehaviour{
         }
     }
 
+    private void Update() {
+        if (_showScoreDelta % 10 == 0) ScoreText.text = (int)Score + " km";
+        _showScoreDelta++;
+    }
+
     public void StartGame() {
         State = GameState.Playing;
         player.SetActive(true);
@@ -30,6 +39,7 @@ public class GameManager: MonoBehaviour{
     
     public void EndGame() {
         State = GameState.Score;
+        FinalScore.text = (int)Score + " km";
         explosion.gameObject.SetActive(true);
         explosion.Stop();
         explosion.Play();

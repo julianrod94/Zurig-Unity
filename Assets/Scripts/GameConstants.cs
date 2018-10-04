@@ -61,7 +61,6 @@ public class GameConstants: MonoBehaviour {
         }
         
         if (GameManager.Instance.State == GameState.Playing && Time.timeScale == 1) {
-            Debug.Log(DifficultyLevel * Time.deltaTime);
             Player.JumpTime = Mathf.Lerp(Player.JumpTime, minJump, DifficultyLevel * Time.deltaTime);
             Cilinder.Speed = Mathf.Lerp(Cilinder.Speed, maxCSpeed, DifficultyLevel * Time.deltaTime);
             Cilinder.SpawnRate = Mathf.Lerp(Cilinder.SpawnRate, minSpawnRate, DifficultyLevel * Time.deltaTime);

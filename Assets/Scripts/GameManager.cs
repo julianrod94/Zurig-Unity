@@ -4,6 +4,7 @@ public enum GameState { Idle, Playing,Pause, Score }
 public class GameManager: MonoBehaviour{
     
     public GameState State = GameState.Idle;
+    public float Score;
     public GameObject player;
     public ParticleSystem shipAce;
     public ParticleSystem explosion;
@@ -24,6 +25,7 @@ public class GameManager: MonoBehaviour{
         State = GameState.Playing;
         player.SetActive(true);
         shipAce.Play();
+        Score = 0;
     }
     
     public void EndGame() {

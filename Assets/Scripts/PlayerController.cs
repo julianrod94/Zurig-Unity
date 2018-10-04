@@ -43,10 +43,11 @@ public class PlayerController : MonoBehaviour {
 			case GameState.Score:
 				return;
 			case GameState.Playing:
-				
 				if (Input.GetKeyDown(KeyCode.P)) {
 					GameManager.Instance.TogglePause();
 				}
+				GameManager.Instance.Score += GameConstants.Cilinder.Speed * Time.deltaTime;
+				Debug.Log(GameManager.Instance.Score);
 				
 				if (_boosting) {
 					Time.timeScale = Mathf.Clamp(Time.timeScale + Time.deltaTime * 10f,1f, 6f);

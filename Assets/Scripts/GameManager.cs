@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,7 @@ public class GameManager: MonoBehaviour{
     public GameState State = GameState.Idle;
     public float Score;
     public Text ScoreText;
+    public Text FinalScore;
     public GameObject player;
     public ParticleSystem shipAce;
     public ParticleSystem explosion;
@@ -39,6 +39,7 @@ public class GameManager: MonoBehaviour{
     
     public void EndGame() {
         State = GameState.Score;
+        FinalScore.text = (int)Score + " km";
         explosion.gameObject.SetActive(true);
         explosion.Stop();
         explosion.Play();

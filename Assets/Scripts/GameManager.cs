@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public enum GameState { Idle, Playing, Score }
+public enum GameState { Idle, Playing,Pause, Score }
 public class GameManager: MonoBehaviour{
     
     public GameState State = GameState.Idle;
     public GameObject player;
     public ParticleSystem shipAce;
     public ParticleSystem explosion;
+    private float _prevTS = 0;
+    private GameState _prevState = GameState.Pause;
 
     public static GameManager Instance;
 
@@ -31,5 +33,14 @@ public class GameManager: MonoBehaviour{
         explosion.Play();
         player.SetActive(false);
         shipAce.Stop();
+    }
+
+    public void TogglePause() {
+        var temp = State;
+        var tempTS = Time.timeScale;
+        State = _prevState;
+        Time.timeScale = _prevTS;
+        _prevState = temp;
+        _prevTS = tempTS;
     }
 }

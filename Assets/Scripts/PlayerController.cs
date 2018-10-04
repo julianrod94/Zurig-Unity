@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour {
 			case GameState.Score:
 				return;
 			case GameState.Playing:
+				if (Input.GetKeyDown(KeyCode.P)) {
+					GameManager.Instance.TogglePause();
+				}
+				
 				if (_boosting) {
 					Time.timeScale = Mathf.Clamp(Time.timeScale + Time.deltaTime * 10f,1f, 6f);
 				} else {
@@ -85,18 +89,20 @@ public class PlayerController : MonoBehaviour {
 		} else if (other.gameObject.CompareTag("Boost")) {
 			StartCoroutine(Boost());
 			Destroy(other.gameObject);
+			AudioManager.Instance.playBoostSound();
 		}
 	}
 
 	void SetInvulnerable(bool isGod) {
-		_invulnerable = isGod;
-		if (isGod) {
-			PlayerShield.SetActive(true);
+		if (_invulnerable != isGod) {
+			PlayerShield.SetActive(isGod);
+			if(!isGod) { TurnShiled(true); }
 		}
+		_invulnerable = isGod;
 	}
 
 	IEnumerator Boost() {
-		if (!_boosting) {
+		if (!_invulnerable) {
 			_boosting = true;
 			yield return new WaitForSeconds(10);
 			_boosting = false;

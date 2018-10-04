@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator Boost() {
 		if (!_invulnerable) {
 			_boosting = true;
+			AudioManager.Instance.playBoostSound();
 			yield return new WaitForSeconds(10);
 			_boosting = false;
 		}

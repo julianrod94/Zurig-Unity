@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 0
   Score: 0
+  ScoreText: {fileID: 1327426386}
   player: {fileID: 1094471664}
   shipAce: {fileID: 594094566}
   explosion: {fileID: 766729478}

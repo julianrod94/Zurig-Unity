@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4390587, g: 0.47908342, b: 0.5231149, a: 1}
+  m_IndirectSpecularColor: {r: 0.43905905, g: 0.47908324, b: 0.5231157, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -232,6 +232,7 @@ MonoBehaviour:
   State: 0
   Score: 0
   ScoreText: {fileID: 1327426386}
+  FinalScore: {fileID: 232742318}
   player: {fileID: 1094471664}
   shipAce: {fileID: 594094566}
   explosion: {fileID: 766729478}
@@ -278,7 +279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: -207}
+  m_AnchoredPosition: {x: 0, y: -207}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.42734492, y: 0.5}
 --- !u!114 &232742318

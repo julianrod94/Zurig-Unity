@@ -49,6 +49,8 @@ public class Cilinder : MonoBehaviour {
 			} 
 		}
 		
+		cilinderParts[Mathf.FloorToInt(Random.Range(0,cilinderParts.Length))].gameObject.SetActive(false);
+		
 		foreach (var go in halfCilinders) {
 			if (Random.value > GameConstants.Cilinder.CilinderDensity) {
 				go.SetActive(false);

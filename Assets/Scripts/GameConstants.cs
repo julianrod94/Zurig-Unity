@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameConstants: MonoBehaviour {
 
-    public float DifficultyLevel = 0.001f;
+    private float DifficultyLevel = 1/60f;
     private static GameConstants _instance = null;
     public static GameConstants Instance
     {
@@ -38,7 +38,7 @@ public class GameConstants: MonoBehaviour {
     private void Awake() {
         Player.JumpTime = 0.6f;
         Cilinder.Speed = 80;
-        Cilinder.SpawnRate = 3;
+        Cilinder.SpawnRate = 2;
         Player.Speed = 3;
     }
     
@@ -50,23 +50,23 @@ public class GameConstants: MonoBehaviour {
         float minCSpeed = 80f;
         float maxCSpeed = 200f;
 
-        float minSpawnRate = 0.83f;
+        float minSpawnRate = 0.5f;
         float maxSpawnRate = 3f;
 
         float minPSpeed = 3f;
         float maxPSpeed = 7.5f;
-        Debug.Log(Player.Speed);
-//
-//        Player.JumpTime = Mathf.Clamp(Player.JumpTime - DifficultyLevel*Time.deltaTime *(maxJump-minJump)/100000, minJump,maxJump);
-//        Cilinder.Speed = Mathf.Clamp(Cilinder.Speed + DifficultyLevel*Time.deltaTime *(maxCSpeed - minCSpeed)/100000, minCSpeed, maxCSpeed);
-//        Cilinder.SpawnRate = Mathf.Clamp(Cilinder.SpawnRate + DifficultyLevel*Time.deltaTime * (maxSpawnRate - minSpawnRate)/100000, minSpawnRate, maxSpawnRate);
-//        Player.Speed = Mathf.Clamp(Cilinder.Speed + DifficultyLevel*Time.deltaTime *(maxPSpeed - minPSpeed)/100000, minPSpeed, maxPSpeed);
-//        
+
+        if (GameManager.Instance.State == GameState.Score) {
+            Awake();
+        }
         
-        Player.JumpTime = Mathf.Lerp(Player.JumpTime, minJump, DifficultyLevel*Time.deltaTime);
-        Cilinder.Speed = Mathf.Lerp(Cilinder.Speed, maxCSpeed, DifficultyLevel*Time.deltaTime);
-        Cilinder.SpawnRate = Mathf.Lerp(Cilinder.SpawnRate, minSpawnRate, DifficultyLevel*Time.deltaTime);
-        Player.Speed = Mathf.Lerp(Player.Speed, maxPSpeed, DifficultyLevel*Time.deltaTime);
-        
+        if (GameManager.Instance.State == GameState.Playing && Time.timeScale == 1) {
+            Debug.Log(DifficultyLevel * Time.deltaTime);
+            Player.JumpTime = Mathf.Lerp(Player.JumpTime, minJump, DifficultyLevel * Time.deltaTime);
+            Cilinder.Speed = Mathf.Lerp(Cilinder.Speed, maxCSpeed, DifficultyLevel * Time.deltaTime);
+            Cilinder.SpawnRate = Mathf.Lerp(Cilinder.SpawnRate, minSpawnRate, DifficultyLevel * Time.deltaTime);
+            Player.Speed = Mathf.Lerp(Player.Speed, maxPSpeed, DifficultyLevel * Time.deltaTime);
+        }
+
     }
 }

@@ -5,14 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
-	private static Vector3 _infinitum = new Vector3(0,0,10);
-	public bool IsShooting;
 	public float ShootCooldownTime;
 	public GameObject PlayerShield;
 
 	private AxisProvider _axis;
 	private Position _position;
-	private Cooldown _shootCD;
 	private bool hasShield;
 	private bool _boosting;
 	private bool _invulnerable;
@@ -22,7 +19,6 @@ public class PlayerController : MonoBehaviour {
 	void Awake () {
 		_axis = new NormalAxis();
 		_position = new Position(transform, 0,0);
-		_shootCD = new Cooldown(ShootCooldownTime);
 	}
 
 	void Start() {
@@ -66,12 +62,6 @@ public class PlayerController : MonoBehaviour {
 	public void TurnShiled(bool turnOn) {
 		hasShield = turnOn;
 		PlayerShield.SetActive(turnOn);
-	}
-	
-	private void Shoot() {
-		if(!IsShooting) { return; }
-		BulletManager.Instance.GenerateBullet(_position, Quaternion.identity);
-		_shootCD.Use();
 	}
 
 	private void OnCollisionEnter(Collision other) {

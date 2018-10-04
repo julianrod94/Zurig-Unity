@@ -197,6 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 144406519}
   - component: {fileID: 144406520}
+  - component: {fileID: 144406521}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -229,9 +230,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   State: 0
-  player: {fileID: 1569651495}
+  Score: 0
+  player: {fileID: 1094471664}
   shipAce: {fileID: 594094566}
   explosion: {fileID: 766729478}
+--- !u!114 &144406521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 144406518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6457b0258f2871349a5c9120a68adbf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &288636597
 GameObject:
   m_ObjectHideFlags: 0
@@ -14833,7 +14846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a881de2dc52b73a43942bb557e3a6aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsShooting: 1
   ShootCooldownTime: 0.3
   PlayerShield: {fileID: 1012423616}
 --- !u!54 &1094471668

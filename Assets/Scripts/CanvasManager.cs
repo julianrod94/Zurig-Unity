@@ -8,6 +8,7 @@ public class CanvasManager : MonoBehaviour {
 	public Canvas Idle;
 	public Canvas Game;
 	public Canvas EndGame;
+	public Canvas Pause;
 
 //	private float _initialTime = GameManager.Instance.Time;
 
@@ -38,6 +39,13 @@ public class CanvasManager : MonoBehaviour {
 					EndGame.gameObject.SetActive(true);
 				}
 				break;
+			
+			case GameState.Pause:
+				if (!Pause.gameObject.activeSelf) {
+					DisableAll();
+					Pause.gameObject.SetActive(true);
+				}
+				break;
 		}
 	}
 
@@ -52,5 +60,6 @@ public class CanvasManager : MonoBehaviour {
 		Idle.gameObject.SetActive(false);
 		Game.gameObject.SetActive(false);
 		EndGame.gameObject.SetActive(false);
+		Pause.gameObject.SetActive(false);
 	}
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4390587, g: 0.47908342, b: 0.5231149, a: 1}
+  m_IndirectSpecularColor: {r: 0.43905905, g: 0.47908324, b: 0.5231157, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15163,6 +15163,7 @@ MonoBehaviour:
   Idle: {fileID: 1173651805}
   Game: {fileID: 1527853331}
   EndGame: {fileID: 787107578}
+  Pause: {fileID: 2042021684}
 --- !u!1 &1527853328
 GameObject:
   m_ObjectHideFlags: 0
@@ -15402,7 +15403,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 267e9d47332194aeb8b6312f0ef5f904, type: 3}
-    m_FontSize: 200
+    m_FontSize: 150
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -15413,7 +15414,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pause
+  m_Text: Paused
 --- !u!222 &1639164166
 CanvasRenderer:
   m_ObjectHideFlags: 0

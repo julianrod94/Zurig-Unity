@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayButton : MonoBehaviour {
 
-	public void startPlaying()
-	{
-		GameManager.Instance.State = GameState.Playing;
+	public void startPlaying() {
+		GameManager.Instance.StartGame();
 	}
 }

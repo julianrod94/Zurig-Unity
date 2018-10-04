@@ -28,13 +28,17 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
-		
-		if (GameManager.Instance.State != GameState.Playing) {
-			_position.Translate(Time.deltaTime,0);
-			return;
+		switch (GameManager.Instance.State) {
+			case GameState.Idle:
+				_position.Translate(Time.deltaTime,0);
+				return;
+			case GameState.Score:
+				return;
+			case GameState.Playing:
+				var x = _axis.GetAxis(axisName) * Time.deltaTime * GameConstants.Player.Speed;
+				_position.Translate(x,0);
+				return;
 		}
-		var x = _axis.GetAxis(axisName) * Time.deltaTime * GameConstants.Player.Speed;
-		_position.Translate(x,0);
 	}
 
 	public void TurnShiled(bool turnOn) {
@@ -59,7 +63,7 @@ public class PlayerController : MonoBehaviour {
 				TurnShiled(false);
 				cilinder.Explode();
 			} else {
-				SceneManager.LoadScene(0);
+				GameManager.Instance.EndGame();
 			}
 		} else if (other.gameObject.CompareTag("Shield")) {
 			AudioManager.Instance.playShieldSound();

@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour {
 					GameManager.Instance.TogglePause();
 				}
 				GameManager.Instance.Score += GameConstants.Cilinder.Speed * Time.deltaTime;
-				Debug.Log(GameManager.Instance.Score);
 				
 				if (_boosting) {
 					Time.timeScale = Mathf.Clamp(Time.timeScale + Time.deltaTime * 10f,1f, 6f);
@@ -71,7 +70,6 @@ public class PlayerController : MonoBehaviour {
 
 			cilinder.hasBeenHit = true;
 
-			Debug.Log(_invulnerable);
 			if (_invulnerable) {
 				cilinder.Explode();
 			} else if (hasShield) {

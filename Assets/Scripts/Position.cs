@@ -17,7 +17,7 @@ public class Position {
     public void Translate(float x, float y) {
         setX(this.x + x);
         this.y += y;
-        _transform.position = CircularPattern.CilPos(this.x, this.y);
+        _transform.localPosition = CircularPattern.CilPos(this.x, this.y);
     }
 
     private void setX(float newX) {
@@ -33,6 +33,6 @@ public class Position {
     public void SetPosition(float x, float y) {
         setX(x);
         this.y = y;
-        _transform.position = CircularPattern.CilPos(x, y);
+        _transform.localPosition = CircularPattern.CilPos(x, y);
     }
 }

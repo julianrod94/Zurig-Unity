@@ -8,6 +8,7 @@ public class PlayerTranslator : MonoBehaviour {
 	public TurningZone zone;
 
 	private bool isRotating = false;
+	public float baseSpeed = 50;
 
 	private float targetRotation = 0;
 	private Vector3 targetPosition = Vector3.zero;
@@ -22,7 +23,11 @@ public class PlayerTranslator : MonoBehaviour {
 				isRotating = false;
 			}
 		} else {
-			transform.Translate(Vector3.forward * 10 * Time.deltaTime);
+			var speed = baseSpeed;
+			if (Input.GetKey(KeyCode.W)) {
+				speed *= 2;
+			}
+			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
 			if (zone != null) {
 

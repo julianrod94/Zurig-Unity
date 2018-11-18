@@ -9,6 +9,7 @@ TagManager:
   - Spawner
   - Cilinder
   - Boost
+  - Key
   layers:
   - Default
   - TransparentFX

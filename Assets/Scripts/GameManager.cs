@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 using UnityEngine.UI;
 
 public enum GameState { Idle, Playing,Pause, Score }
@@ -14,6 +16,10 @@ public class GameManager: MonoBehaviour{
     private float _prevTS = 0;
     private GameState _prevState = GameState.Pause;
     private int _showScoreDelta = 0;
+    public GameObject door;
+    private int keyParts = 0;
+    public GameObject winningTurningZone;
+    
 
     public static GameManager Instance;
 
@@ -28,6 +34,7 @@ public class GameManager: MonoBehaviour{
     private void Update() {
         if (_showScoreDelta % 10 == 0) ScoreText.text = (int)Score + " km";
         _showScoreDelta++;
+        if (keyParts > 0) OpenDoor();
     }
 
     public void StartGame() {
@@ -35,6 +42,10 @@ public class GameManager: MonoBehaviour{
         player.SetActive(true);
         shipAce.Play();
         Score = 0;
+    }
+
+    public void NextLevel() {
+        
     }
     
     public void EndGame() {
@@ -55,5 +66,15 @@ public class GameManager: MonoBehaviour{
         Debug.Log("TimeScale" + Time.timeScale);
         _prevState = temp;
         _prevTS = tempTS;
+    }
+
+    private void OpenDoor() {
+        door.SetActive(false);
+    }
+
+    public void KeyObtained(GameObject key) {
+        key.SetActive(false);
+        keyParts++;
+        winningTurningZone.GetComponent<TurningZone>().FrontOpen = true;
     }
 }

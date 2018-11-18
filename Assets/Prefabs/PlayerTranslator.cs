@@ -55,8 +55,16 @@ public class PlayerTranslator : MonoBehaviour {
 		if (turningZone != null) {
 			zone = turningZone;
 		}
+		var finishZone = other.GetComponentInParent<FinishZone>();
+		if (finishZone != null) {
+			GameManager.Instance.EndGame();
+		}
 	}
-	
+
+	private void OnCollisionEnter(Collision other) {
+		if (other.gameObject.CompareTag("Key")) GameManager.Instance.KeyObtained(other.gameObject);
+	}
+
 	private void OnTriggerExit(Collider other) {
 		var turningZone = other.GetComponentInParent<TurningZone>();
 		if (turningZone != null) {

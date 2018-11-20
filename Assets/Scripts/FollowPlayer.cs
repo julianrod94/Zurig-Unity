@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour {
 
-    public Transform player;
+    private Transform player;
 	// Use this for initialization
 	void Start () {
-		
+		player = GameManager.Instance.player.transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = new Vector3(player.position.x, player.position.y, player.position.z - 2f);
+		if (player != null) {
+			transform.position = new Vector3(player.position.x, player.position.y, player.position.z - 2f);			
+		}
 	}
 }

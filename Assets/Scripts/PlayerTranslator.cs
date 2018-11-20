@@ -29,7 +29,7 @@ public class PlayerTranslator : MonoBehaviour {
 				isRotating = false;
 			}
 		} else {
-			transform.Translate(Vector3.forward * 10 * Time.deltaTime);
+			transform.Translate(Vector3.forward * 50 * Time.deltaTime);
 
 			if (zone != null) {
 

@@ -11,7 +11,8 @@ public class Maze {
         Key, 
         Pipe,
         PipeTurning,
-        Turning
+        Turning,
+        ClosedZone
     }
 
     private MazePart[,] _maze;

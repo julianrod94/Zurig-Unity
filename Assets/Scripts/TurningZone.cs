@@ -8,12 +8,31 @@ public class TurningZone : MonoBehaviour {
 		LEFT,
 		RIGHT
 	}
+
+	public enum Wall
+	{
+		NORTH,
+		SOUTH,
+		EAST,
+		WEST
+	}
 	
 	public bool LeftOpen;
 	public bool RightOpen;
 	public bool FrontOpen;
 	public bool BackOpen;
 
+	public GameObject NWall;
+	public GameObject SWall;
+	public GameObject EWall;
+	public GameObject WWall;
+
+	private void Update() {
+		WWall.SetActive(!LeftOpen);
+		EWall.SetActive(!RightOpen);
+		NWall.SetActive(!FrontOpen);
+		SWall.SetActive(!BackOpen);
+	}
 
 	public bool canRotate(Transform transform, TurningDirection direction) {
 		var angle = transform.eulerAngles.y;
@@ -53,5 +72,33 @@ public class TurningZone : MonoBehaviour {
 
 		return false;
 	}
+
+	public void EnableWall(Wall wall)
+	{
+		if (wall == Wall.WEST)
+		{
+			LeftOpen = true;
+			WWall.SetActive(false);
+		}
+
+		if (wall == Wall.EAST)
+		{
+			RightOpen = true;
+			EWall.SetActive(false);
+		}
+
+		if (wall == Wall.NORTH)
+		{
+			FrontOpen = true;
+			NWall.SetActive(false);
+		}
+
+		if (wall == Wall.SOUTH)
+		{
+			BackOpen = true;
+			SWall.SetActive(false);
+		}
+	}
+	
 	
 }

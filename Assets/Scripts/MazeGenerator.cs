@@ -8,11 +8,13 @@ public class MazeGenerator: MonoBehaviour {
     public static Maze GeneratedMaze;
     
     public GameObject pipe;
+    public GameObject startCilinder;
+    public GameObject endCilinder;
     public GameObject turningZone;
 
     private void Awake() {
-        var maze = GenerateMaze(15);
-        InstantiateMaze(maze);
+        GeneratedMaze = GenerateMaze(15);
+        InstantiateMaze(GeneratedMaze);
     }
 
     public static Maze GenerateMaze(int difficulty) {
@@ -20,6 +22,7 @@ public class MazeGenerator: MonoBehaviour {
         try {
             FillForward(maze, difficulty, -1);
             addTurningBlokcs(maze);
+            AddStartingAndEnding(maze);
         } catch (Exception e) {
             Debug.LogError(e);
             throw;
@@ -120,20 +123,71 @@ public class MazeGenerator: MonoBehaviour {
 
                 if (connections > 1) {
                     maze[i, j] = Maze.MazePart.Turning;
+                } else {
+                    maze[i, j] = Maze.MazePart.ClosedZone;
                 }
             }
         }
+    }
+
+    private static void AddStartingAndEnding(Maze maze) {
+        CreateConnectedZone(maze, Maze.MazePart.Start);
+        CreateConnectedZone(maze, Maze.MazePart.End);
+    }
+
+    private static void CreateConnectedZone(Maze maze, Maze.MazePart part) {
+        var rand = new Random();
+        bool created = false;
         
-        Debug.Log("DONE");
-    } 
+        while (!created) {
+            var newI = rand.Next(maze.Rows);
+            var newJ = rand.Next(maze.Columns);
+
+            var checking = maze[newI, newJ];
+            if (checking == Maze.MazePart.Turning) {
+                var directions = new int[,] {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+                for (int k = 0; k < 4; k++) {
+                    var newRow = newI + directions[k, 0];
+                    var newColumn = newJ + directions[k, 1];
+                    if (!maze.isInside(newRow, newColumn)) {
+                        continue;
+                    }
+
+                    if (maze[newRow, newColumn] == Maze.MazePart.None) {
+                        maze[newRow, newColumn] = part;
+                        created = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     public void InstantiateMaze(Maze maze) {
         for (int i = 0; i < maze.Rows; i++) {
             for (int j = 0; j < maze.Columns; j++) {
                 var value = maze[i, j];
                 int xPos, yPos;
+                GameObject instantiating = null;
                 switch (value) {
                         case Maze.MazePart.Pipe:
+                        case Maze.MazePart.Start:
+                        case Maze.MazePart.End:
+
+                            switch (value) {
+                                   case Maze.MazePart.Pipe: instantiating = pipe; break;
+                                   case Maze.MazePart.Start: instantiating = startCilinder; break;
+                                   case Maze.MazePart.End: instantiating = endCilinder; break;
+                            }
+                            if (value == Maze.MazePart.Pipe) {
+                            }
+                            
+                            if (value == Maze.MazePart.Pipe) {
+                            }
+                            
+                            if (value == Maze.MazePart.Pipe) {
+                            }
+                            
                             xPos = (i+1)/2*80;
                             if (i % 2 == 0) {
                                 xPos += 15;
@@ -151,7 +205,7 @@ public class MazeGenerator: MonoBehaviour {
                             } else {
                                 rotation = Quaternion.identity;
                             }
-                            var newPipe = Instantiate(this.pipe, new Vector3(xPos, 0, yPos),rotation);
+                            var newPipe = Instantiate(instantiating, new Vector3(xPos, 0, yPos),rotation);
                             var part = newPipe.GetComponent<MazePart>();
                             part.i = i;
                             part.j = j;
@@ -190,25 +244,25 @@ public class MazeGenerator: MonoBehaviour {
 
                                         switch (k) {
                                             case 0:
-                                                if (maze[newRow, newColumn] == Maze.MazePart.Pipe) {
+                                                if (IsOpen(maze, newRow, newColumn)) {
                                                     zone.LeftOpen = true;
                                                 }
                                                 break;
                                             
                                             case 1:
-                                                if (maze[newRow, newColumn] == Maze.MazePart.Pipe) {
+                                                if (IsOpen(maze, newRow, newColumn)) {
                                                     zone.BackOpen = true;
                                                 }
                                                 break;
                                             
                                             case 2:
-                                                if (maze[newRow, newColumn] == Maze.MazePart.Pipe) {
+                                                if (IsOpen(maze, newRow, newColumn)) {
                                                     zone.RightOpen = true;
                                                 }
                                                 break;
                                             
                                             case 3:
-                                                if (maze[newRow, newColumn] == Maze.MazePart.Pipe) {
+                                                if (IsOpen(maze, newRow, newColumn)) {
                                                     zone.FrontOpen = true;
                                                 }
                                                 break;
@@ -218,5 +272,9 @@ public class MazeGenerator: MonoBehaviour {
                 }
             }
         }
+    }
+
+    private bool IsOpen(Maze maze,int i, int j) {
+        return maze[i, j] == Maze.MazePart.Pipe || maze[i, j] == Maze.MazePart.Start || maze[i, j] == Maze.MazePart.End;
     }
 }

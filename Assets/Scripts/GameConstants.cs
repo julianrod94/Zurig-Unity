@@ -28,7 +28,7 @@ public class GameConstants: MonoBehaviour {
     
     //Player
     public static class Player {
-        public static float Speed = 3;
+        public static float Speed = 10;
         public static float JumpForce = 60;
         public static float JumpTime = 0.6f;
         
@@ -39,7 +39,7 @@ public class GameConstants: MonoBehaviour {
         Player.JumpTime = 0.6f;
         Cilinder.Speed = 80;
         Cilinder.SpawnRate = 2;
-        Player.Speed = 3;
+        Player.Speed = 10;
     }
     
     

@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
+		Debug.Log("dasdasdas");
 		switch (GameManager.Instance.State) {
 			case GameState.Pause:
 				Time.timeScale = 0;
@@ -63,7 +64,14 @@ public class PlayerController : MonoBehaviour {
 		PlayerShield.SetActive(turnOn);
 	}
 
-	private void OnCollisionEnter(Collision other) {
+	public void OnTriggerEnter(Collider other) {
+		Debug.Log(other.gameObject.tag);
+		if (other.gameObject.CompareTag("Wall")) {
+			GameManager.Instance.EndGame();
+		}
+	}
+
+	public void OnCollisionEnter(Collision other) {
 		var cilinder = other.gameObject.GetComponentInParent<Cilinder>();
 		if (other.gameObject.CompareTag("Cilinder")) {	
 			if(cilinder.hasBeenHit) { return; }
@@ -86,9 +94,6 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine(Boost());
 			Destroy(other.gameObject);
 			AudioManager.Instance.playBoostSound();
-		} else if (other.gameObject.CompareTag("Wall")) {
-			cilinder.Explode();
-			GameManager.Instance.EndGame();
 		}
 	}
 

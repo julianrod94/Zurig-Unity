@@ -11,6 +11,13 @@ public class PlayerTranslator : MonoBehaviour {
 
 	private float targetRotation = 0;
 	private Vector3 targetPosition = Vector3.zero;
+
+	private PlayerController controller;
+
+	private void Awake() {
+		controller = GetComponentInChildren<PlayerController>();
+	}
+
 	// Use this for initialization
 	void Update () {
 		if (isRotating) {
@@ -59,10 +66,14 @@ public class PlayerTranslator : MonoBehaviour {
 		if (finishZone != null) {
 			GameManager.Instance.EndGame();
 		}
+
+		controller.OnTriggerEnter(other);
 	}
 
 	private void OnCollisionEnter(Collision other) {
 		if (other.gameObject.CompareTag("Key")) GameManager.Instance.KeyObtained(other.gameObject);
+		
+		controller.OnCollisionEnter(other);
 	}
 
 	private void OnTriggerExit(Collider other) {

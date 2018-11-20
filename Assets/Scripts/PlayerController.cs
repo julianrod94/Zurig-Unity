@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
-		Debug.Log("dasdasdas");
 		switch (GameManager.Instance.State) {
 			case GameState.Pause:
 				Time.timeScale = 0;

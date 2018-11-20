@@ -75,6 +75,6 @@ public class GameManager: MonoBehaviour{
     public void KeyObtained(GameObject key) {
         key.SetActive(false);
         keyParts++;
-        winningTurningZone.GetComponent<TurningZone>().FrontOpen = true;
+        winningTurningZone.GetComponent<TurningZone>().EnableWall(TurningZone.Wall.NORTH);
     }
 }

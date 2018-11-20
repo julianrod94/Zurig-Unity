@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision other) {
-		if (other.gameObject.CompareTag("Cilinder")) {
-			var cilinder = other.gameObject.GetComponentInParent<Cilinder>();
+		var cilinder = other.gameObject.GetComponentInParent<Cilinder>();
+		if (other.gameObject.CompareTag("Cilinder")) {	
 			if(cilinder.hasBeenHit) { return; }
 
 			cilinder.hasBeenHit = true;
@@ -86,6 +86,9 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine(Boost());
 			Destroy(other.gameObject);
 			AudioManager.Instance.playBoostSound();
+		} else if (other.gameObject.CompareTag("Wall")) {
+			cilinder.Explode();
+			GameManager.Instance.EndGame();
 		}
 	}
 

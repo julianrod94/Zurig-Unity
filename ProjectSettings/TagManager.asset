@@ -10,6 +10,7 @@ TagManager:
   - Cilinder
   - Boost
   - Key
+  - Wall
   layers:
   - Default
   - TransparentFX

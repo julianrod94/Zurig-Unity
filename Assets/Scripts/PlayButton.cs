@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayButton : MonoBehaviour {
 
 	public void startPlaying() {
+		AudioManager.Instance.playButtonSound();
 		GameManager.Instance.StartGame();
 	}
 	

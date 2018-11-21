@@ -72,6 +72,7 @@ public class GameManager: MonoBehaviour{
     }
 
     public void TogglePause() {
+        AudioManager.Instance.playButtonSound();
         var temp = State;
         var tempTS = Time.timeScale;
         State = _prevState;

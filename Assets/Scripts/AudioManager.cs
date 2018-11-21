@@ -20,6 +20,8 @@ using UnityEngine;
 		private AudioClip mainTheme;
 		[SerializeField]
 		private AudioClip buttonSound;
+		[SerializeField]
+		private AudioClip pickUpKeySoung;
 
 		private AudioSource mainThemeLoop;
 		
@@ -81,6 +83,11 @@ using UnityEngine;
 		public void playButtonSound()
 		{
 			GetComponent<AudioSource>().PlayOneShot(buttonSound, 1f);	
+		}
+		
+		public void playPickUpKeySound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(pickUpKeySoung, 1f);	
 		}
 		
 		public void playMainTheme()

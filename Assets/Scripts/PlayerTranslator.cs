@@ -67,6 +67,7 @@ public class PlayerTranslator : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag("Key")) {
+			AudioManager.Instance.playPickUpKeySound();
 			GameManager.Instance.KeyObtained(other.gameObject);
 			return;
 		}

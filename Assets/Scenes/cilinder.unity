@@ -5137,6 +5137,7 @@ MonoBehaviour:
   shieldSound: {fileID: 8300000, guid: ab16d20cb07734d2f8a488fe1c18bdbe, type: 3}
   mainTheme: {fileID: 8300000, guid: 0cf098e4c6df84766ad4bf60e10b2749, type: 3}
   buttonSound: {fileID: 8300000, guid: 7280452e3b3094315ad9962d31fdb99c, type: 3}
+  pickUpKeySoung: {fileID: 8300000, guid: e87e3a8ae11f8438b9c190a6df685df4, type: 3}
 --- !u!82 &813259010
 AudioSource:
   m_ObjectHideFlags: 0

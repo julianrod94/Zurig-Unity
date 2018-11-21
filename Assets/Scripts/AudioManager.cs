@@ -21,7 +21,9 @@ using UnityEngine;
 		[SerializeField]
 		private AudioClip buttonSound;
 		[SerializeField]
-		private AudioClip pickUpKeySoung;
+		private AudioClip pickUpKeySound;
+		[SerializeField]
+		private AudioClip portalOpenedSound;
 
 		private AudioSource mainThemeLoop;
 		
@@ -87,7 +89,14 @@ using UnityEngine;
 		
 		public void playPickUpKeySound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(pickUpKeySoung, 1f);	
+			GetComponent<AudioSource>().PlayOneShot(pickUpKeySound, 1f);	
+		}
+		
+		public void playPortalOpenedSound()
+		{
+			stopMainTheme();
+			mainThemeLoop.clip = portalOpenedSound;
+			playMainTheme();	
 		}
 		
 		public void playMainTheme()

@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour {
 				if (Input.GetKeyDown(KeyCode.P)) {
 					GameManager.Instance.TogglePause();
 				}
-				GameManager.Instance.Score += GameConstants.Cilinder.Speed * Time.deltaTime;
 				
 				if (_boosting) {
 					Time.timeScale = Mathf.Clamp(Time.timeScale + Time.deltaTime * 10f,1f, 6f);

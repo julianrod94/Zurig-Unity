@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour {
-	
+	public Transform target;
 	// Update is called once per frame
 	void Update () {
-		transform.LookAt(Vector3.zero, Vector3.up);
-		if (transform.rotation.eulerAngles.y > 100) {
-			transform.LookAt(Vector3.zero, Vector3.down);
+		Vector3 up = Vector3.down;
+		
+		transform.LookAt(target, Vector3.down);
+		if (transform.parent.parent.rotation.y > 100) {
+			if (transform.localRotation.eulerAngles.y > 100) {
+				transform.LookAt(target, Vector3.up);
+			}
+		} else {
+			if (transform.localRotation.eulerAngles.y < 100) {
+				transform.LookAt(target,  Vector3.up);
+			}
 		}
 	}
 }

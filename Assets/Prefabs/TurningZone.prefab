@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 65630756558905366}
   - component: {fileID: 114085980783808420}
   - component: {fileID: 54294036762010886}
+  - component: {fileID: 114583723301651392}
   m_Layer: 0
   m_Name: TurningZone
   m_TagString: Untagged
@@ -496,3 +497,16 @@ MonoBehaviour:
   SWall: {fileID: 1382564120366342}
   EWall: {fileID: 1458670987653836}
   WWall: {fileID: 1631096540930146}
+--- !u!114 &114583723301651392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1963256567881794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ae930a2be2ce52448cff61e9241b3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i: 0
+  j: 0

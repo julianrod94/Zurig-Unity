@@ -19,8 +19,15 @@ public class PlayerTranslator : MonoBehaviour {
 		controller = GetComponentInChildren<PlayerController>();
 	}
 
+	private void Start() {
+		GameManager.Instance.player = controller.gameObject;
+	}
+
 	// Use this for initialization
 	void Update () {
+		if (GameManager.Instance.State != GameState.Playing) {
+			return;
+		}
 		if (isRotating) {
 			transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, targetRotation, 0), 0.2f);
 			transform.position = Vector3.Lerp(transform.position, targetPosition, 0.2f);

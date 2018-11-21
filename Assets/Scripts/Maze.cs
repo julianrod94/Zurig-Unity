@@ -7,10 +7,8 @@ public class Maze {
         None = 0,
         Start,
         End,
-        Block,
-        Key, 
         Pipe,
-        PipeTurning,
+        ClosedPipe,
         Turning,
         ClosedZone
     }
@@ -18,6 +16,10 @@ public class Maze {
     private MazePart[,] _maze;
     public int Rows;
     public int Columns;
+
+    public TurningZone.Wall StartZoneOpening;
+    public TurningZone.Wall EndZoneOpening;
+    
     public Maze(int rows, int columns) {
         _maze = new MazePart[rows,columns];
         this.Rows = rows;
@@ -54,6 +56,7 @@ public class Maze {
             var newColumn = column + directions[i,1];
             if(!isInside(newRow, newColumn)) { continue; }
 
+            if (newRow == 0 || newRow == Rows-1 || newColumn == 0 || newColumn == Columns-1) { continue;}
             if (_maze[newRow, newColumn] == MazePart.None) {
                 posibleValues.Add(newRow * Rows + newColumn);
             }

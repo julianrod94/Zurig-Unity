@@ -123,7 +123,7 @@ public class MazeGenerator: MonoBehaviour {
 
                 if (connections > 1) {
                     maze[i, j] = Maze.MazePart.Turning;
-                } else {
+                } else if (connections == 1) {
                     maze[i, j] = Maze.MazePart.ClosedZone;
                 }
             }
@@ -137,14 +137,12 @@ public class MazeGenerator: MonoBehaviour {
 
     private static void CreateConnectedZone(Maze maze, Maze.MazePart part) {
         var rand = new Random();
-        bool created = false;
-        
-        while (!created) {
+        while (true) {
             var newI = rand.Next(maze.Rows);
             var newJ = rand.Next(maze.Columns);
 
             var checking = maze[newI, newJ];
-            if (checking == Maze.MazePart.Turning) {
+            if (checking == Maze.MazePart.Turning || checking == Maze.MazePart.ClosedZone) {
                 var directions = new int[,] {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
                 for (int k = 0; k < 4; k++) {
                     var newRow = newI + directions[k, 0];
@@ -155,8 +153,32 @@ public class MazeGenerator: MonoBehaviour {
 
                     if (maze[newRow, newColumn] == Maze.MazePart.None) {
                         maze[newRow, newColumn] = part;
-                        created = true;
-                        break;
+                        maze[newI, newJ] = Maze.MazePart.Turning;
+                        TurningZone.Wall direction = TurningZone.Wall.NORTH;
+                        switch (k) {
+                            case 0:
+                                direction = TurningZone.Wall.EAST;
+                                break;
+
+                            case 1:
+                                direction = TurningZone.Wall.SOUTH;
+                                break;
+
+                            case 2:
+                                direction = TurningZone.Wall.WEST;
+                                break;
+
+                            case 3:
+                                direction = TurningZone.Wall.NORTH;
+                                break;
+                        }
+                        if (part == Maze.MazePart.Start) {
+                            maze.StartZoneOpening = direction;
+                        } else if (part == Maze.MazePart.End) {
+                            maze.EndZoneOpening = direction;
+                        }
+                        
+                        return;
                     }
                 }
             }
@@ -164,111 +186,135 @@ public class MazeGenerator: MonoBehaviour {
     }
 
     public void InstantiateMaze(Maze maze) {
+        Debug.Log("START " + maze.StartZoneOpening);
+        Debug.Log("END " + maze.EndZoneOpening);
         for (int i = 0; i < maze.Rows; i++) {
             for (int j = 0; j < maze.Columns; j++) {
                 var value = maze[i, j];
                 int xPos, yPos;
                 GameObject instantiating = null;
                 switch (value) {
-                        case Maze.MazePart.Pipe:
-                        case Maze.MazePart.Start:
-                        case Maze.MazePart.End:
+                    case Maze.MazePart.Pipe:
+                    case Maze.MazePart.Start:
+                    case Maze.MazePart.End:
 
-                            switch (value) {
-                                   case Maze.MazePart.Pipe: instantiating = pipe; break;
-                                   case Maze.MazePart.Start: instantiating = startCilinder; break;
-                                   case Maze.MazePart.End: instantiating = endCilinder; break;
-                            }
-                            if (value == Maze.MazePart.Pipe) {
-                            }
-                            
-                            if (value == Maze.MazePart.Pipe) {
-                            }
-                            
-                            if (value == Maze.MazePart.Pipe) {
-                            }
-                            
-                            xPos = (i+1)/2*80;
-                            if (i % 2 == 0) {
-                                xPos += 15;
-                            }
+                        switch (value) {
+                            case Maze.MazePart.Pipe:
+                                instantiating = pipe;
+                                break;
+                            case Maze.MazePart.Start:
+                                instantiating = startCilinder;
+                                break;
+                            case Maze.MazePart.End:
+                                instantiating = endCilinder;
+                                break;
+                        }
 
-                            yPos = (j+1)/2*80;
-                            if (j % 2 == 0) {
-                                yPos += 15;
-                            }
+                        xPos = (i + 1) / 2 * 80;
+                        if (i % 2 == 0) {
+                            xPos += 15;
+                        }
 
-                            Quaternion rotation;
-                            if (i % 2 == 0) {
-                                rotation = Quaternion.Euler(0, 90, 0);
+                        yPos = (j + 1) / 2 * 80;
+                        if (j % 2 == 0) {
+                            yPos += 15;
+                        }
 
-                            } else {
-                                rotation = Quaternion.identity;
-                            }
-                            var newPipe = Instantiate(instantiating, new Vector3(xPos, 0, yPos),rotation);
-                            var part = newPipe.GetComponent<MazePart>();
-                            part.i = i;
-                            part.j = j;
+                        Quaternion rotation;
+                        if (i % 2 == 0) {
+                            rotation = Quaternion.Euler(0, 90, 0);
+                        } else {
+                            rotation = Quaternion.identity;
+                        }
 
-                            break;
+                        var newPipe = Instantiate(instantiating, new Vector3(xPos, 0, yPos), rotation);
+                        var part = newPipe.GetComponent<MazePart>();
+                        part.i = i;
+                        part.j = j;
+
+                        if (
+                            (value == Maze.MazePart.Start  && 
+                             (maze.StartZoneOpening == TurningZone.Wall.EAST || maze.StartZoneOpening == TurningZone.Wall.SOUTH)
+                    
+                    ||
+                             (value == Maze.MazePart.End  && 
+                              (maze.EndZoneOpening == TurningZone.Wall.EAST || maze.EndZoneOpening == TurningZone.Wall.SOUTH)
+                              )
+                             )
+                            )
+                    {
+                            newPipe.transform.Rotate(0,180,0);
+                            newPipe.transform.Translate(0,0,-50);
+                        }
+
+                        break;
+
+                    case Maze.MazePart.Turning:
+                    case Maze.MazePart.ClosedZone:
+                        xPos = (i + 1) / 2 * 80;
+                        if (i % 2 == 0) {
+                            xPos += 15;
+                        }
+
+                        yPos = (j + 1) / 2 * 80;
+                        if (j % 2 == 0) {
+                            yPos += 15;
+                        }
+
+                        var go = Instantiate(turningZone, new Vector3(xPos, 0, yPos), Quaternion.identity);
+                        var parti = go.GetComponent<MazePart>();
+                        parti.i = i;
+                        parti.j = j;
+                        var zone = go.GetComponent<TurningZone>();
+
+                        var directions = new int[,] {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
                         
-                        case Maze.MazePart.Turning:
-                            xPos = (i+1)/2*80;
-                            if (i % 2 == 0) {
-                                xPos += 15;
+                        var shouldOpen = value == Maze.MazePart.Turning;
+                        zone.BackOpen = !shouldOpen;
+                        zone.LeftOpen = !shouldOpen;
+                        zone.FrontOpen = !shouldOpen;
+                        zone.RightOpen = !shouldOpen;
+                        
+                        for (int k = 0; k < 4; k++) {
+                            var newRow = i + directions[k, 0];
+                            var newColumn = j + directions[k, 1];
+
+                            if (!maze.isInside(newRow, newColumn)) {
+                                continue;
                             }
 
-                            yPos = (j+1)/2*80;
-                            if (j % 2 == 0) {
-                                yPos += 15;
-                            }
-                            var go = Instantiate(turningZone, new Vector3(xPos, 0, yPos), Quaternion.identity);
-                            var parti = go.GetComponent<MazePart>();
-                            parti.i = i;
-                            parti.j = j;
-                            var zone = go.GetComponent<TurningZone>();
-                            
-                            var directions = new int[,] {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+                            switch (k) {
+                                case 0:
+                                    if (IsOpen(maze, newRow, newColumn)) {
+                                        zone.LeftOpen = shouldOpen;
+                                    }
 
-                            zone.BackOpen = false;
-                            zone.LeftOpen = false;
-                            zone.FrontOpen = false;
-                            zone.RightOpen = false;
-                                    for (int k = 0; k < 4; k++) {
-                                        var newRow = i + directions[k, 0];
-                                        var newColumn = j + directions[k, 1];
-                                        
-                                        if (!maze.isInside(newRow, newColumn)) {
-                                            continue;
-                                        }
+                                    break;
 
-                                        switch (k) {
-                                            case 0:
-                                                if (IsOpen(maze, newRow, newColumn)) {
-                                                    zone.LeftOpen = true;
-                                                }
-                                                break;
-                                            
-                                            case 1:
-                                                if (IsOpen(maze, newRow, newColumn)) {
-                                                    zone.BackOpen = true;
-                                                }
-                                                break;
-                                            
-                                            case 2:
-                                                if (IsOpen(maze, newRow, newColumn)) {
-                                                    zone.RightOpen = true;
-                                                }
-                                                break;
-                                            
-                                            case 3:
-                                                if (IsOpen(maze, newRow, newColumn)) {
-                                                    zone.FrontOpen = true;
-                                                }
-                                                break;
-                                        }
+                                case 1:
+                                    if (IsOpen(maze, newRow, newColumn)) {
+                                        zone.BackOpen = shouldOpen;
+                                    }
+
+                                    break;
+
+                                case 2:
+                                    if (IsOpen(maze, newRow, newColumn)) {
+                                        zone.RightOpen = shouldOpen;
+                                    }
+
+                                    break;
+
+                                case 3:
+                                    if (IsOpen(maze, newRow, newColumn)) {
+                                        zone.FrontOpen = shouldOpen;
+                                    }
+
+                                    break;
+
                             }
-                            break;
+                        }
+                        break;
                 }
             }
         }

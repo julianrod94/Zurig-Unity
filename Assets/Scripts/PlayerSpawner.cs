@@ -7,6 +7,6 @@ public class PlayerSpawner : MonoBehaviour {
 	public GameObject playerPrefab;
 	
 	private void Awake() {
-		Instantiate(playerPrefab);
+		Instantiate(playerPrefab, transform.position, transform.rotation);
 	}
 }

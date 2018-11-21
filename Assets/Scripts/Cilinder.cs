@@ -38,7 +38,7 @@ public class Cilinder : MonoBehaviour {
 					GameManager.Instance.totalKeys++;
 				} else if (Random.value < GameConstants.Cilinder.CilinderShieldOdds) {
 					Instantiate(shield, go.spawner.transform.position, Quaternion.identity);
-				}
+				}	
 				go.gameObject.SetActive(false);
 			} 
 		}

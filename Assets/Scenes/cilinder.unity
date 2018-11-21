@@ -15289,6 +15289,7 @@ MonoBehaviour:
   endCilinder: {fileID: 0}
   collectedKeys: 0
   totalKeys: 0
+  Level: 0
 --- !u!4 &1770798935
 Transform:
   m_ObjectHideFlags: 0

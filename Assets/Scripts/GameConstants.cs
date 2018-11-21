@@ -19,7 +19,7 @@ public class GameConstants: MonoBehaviour {
     
     //Cilinder
     public static class Cilinder {
-        public static float Speed = 80;
+        public static float Speed = 50;
         public static float CilinderDensity = 0.5f;
         public static float CilinderShieldOdds = 0.2f;
         public static float KeyOdds = 0.1f;
@@ -62,12 +62,12 @@ public class GameConstants: MonoBehaviour {
             Awake();
         }
         
-        if (GameManager.Instance.State == GameState.Playing && Time.timeScale == 1) {
-            Player.JumpTime = Mathf.Lerp(Player.JumpTime, minJump, DifficultyLevel * Time.deltaTime);
-            Cilinder.Speed = Mathf.Lerp(Cilinder.Speed, maxCSpeed, DifficultyLevel * Time.deltaTime);
-            Cilinder.SpawnRate = Mathf.Lerp(Cilinder.SpawnRate, minSpawnRate, DifficultyLevel * Time.deltaTime);
-            Player.RotationSpeed = Mathf.Lerp(Player.RotationSpeed, maxPSpeed, DifficultyLevel * Time.deltaTime);
-        }
+//        if (GameManager.Instance.State == GameState.Playing && Time.timeScale == 1) {
+//            Player.JumpTime = Mathf.Lerp(Player.JumpTime, minJump, DifficultyLevel * Time.deltaTime);
+//            Cilinder.Speed = Mathf.Lerp(Cilinder.Speed, maxCSpeed, DifficultyLevel * Time.deltaTime);
+//            Cilinder.SpawnRate = Mathf.Lerp(Cilinder.SpawnRate, minSpawnRate, DifficultyLevel * Time.deltaTime);
+//            Player.RotationSpeed = Mathf.Lerp(Player.RotationSpeed, maxPSpeed, DifficultyLevel * Time.deltaTime);
+//        }
 
     }
 }

@@ -18,20 +18,27 @@ public class GameManager: MonoBehaviour{
     public int collectedKeys = 0;
     public int totalKeys = 0;
 
+    public int Level = 1;
+
     public static GameManager Instance;
 
     private void Awake() {
         if (Instance == null) {
             Instance = this;
+            DontDestroyOnLoad(this);
         } else {
+            Instance.ResetValues();
             Destroy(gameObject);
         }
     }
 
-    private void Update() {
-//        if (keyParts > 0) OpenDoor();
+    public void ResetValues() {
+        collectedKeys = 0;
+        totalKeys = 0;
+        endCilinder = null;
+        player = null;
     }
-
+    
     public void StartGame() {
         State = GameState.Playing;
         player.SetActive(true);

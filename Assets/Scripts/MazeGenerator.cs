@@ -79,7 +79,6 @@ public class MazeGenerator: MonoBehaviour {
 
             var current = borders.ElementAt(index);
             borders.RemoveAt(index);
-            Debug.Log("current" + current/maze.Rows + " , " + current%maze.Rows);
             maze[current] = Maze.MazePart.Pipe;
             var neighbours = maze.UnvisitedNeighbours(current).ToList();
             Shuffle(neighbours, rand);
@@ -121,10 +120,10 @@ public class MazeGenerator: MonoBehaviour {
                     }
                 }
 
-                if (connections > 1) {
+                if (connections > 0) {
                     maze[i, j] = Maze.MazePart.Turning;
                 } else if (connections == 1) {
-                    maze[i, j] = Maze.MazePart.ClosedZone;
+//                    maze[i, j] = Maze.MazePart.ClosedZone;
                 }
             }
         }

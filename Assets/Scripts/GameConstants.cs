@@ -21,14 +21,16 @@ public class GameConstants: MonoBehaviour {
     public static class Cilinder {
         public static float Speed = 80;
         public static float CilinderDensity = 0.5f;
-        public static float CilinderShieldOdds = 0.05f;
-        public static float BoostOdds = 0.03f;
+        public static float CilinderShieldOdds = 0.2f;
+        public static float KeyOdds = 0.1f;
+        public static float BoostOdds = 0f;
         public static float SpawnRate = 3f;
     }
     
     //Player
     public static class Player {
-        public static float Speed = 10;
+        public static float RotationSpeed = 1f;
+        public static float Speed = 35;
         public static float JumpForce = 60;
         public static float JumpTime = 0.6f;
         
@@ -39,7 +41,7 @@ public class GameConstants: MonoBehaviour {
         Player.JumpTime = 0.6f;
         Cilinder.Speed = 80;
         Cilinder.SpawnRate = 2;
-        Player.Speed = 10;
+        Player.RotationSpeed = 10;
     }
     
     
@@ -64,7 +66,7 @@ public class GameConstants: MonoBehaviour {
             Player.JumpTime = Mathf.Lerp(Player.JumpTime, minJump, DifficultyLevel * Time.deltaTime);
             Cilinder.Speed = Mathf.Lerp(Cilinder.Speed, maxCSpeed, DifficultyLevel * Time.deltaTime);
             Cilinder.SpawnRate = Mathf.Lerp(Cilinder.SpawnRate, minSpawnRate, DifficultyLevel * Time.deltaTime);
-            Player.Speed = Mathf.Lerp(Player.Speed, maxPSpeed, DifficultyLevel * Time.deltaTime);
+            Player.RotationSpeed = Mathf.Lerp(Player.RotationSpeed, maxPSpeed, DifficultyLevel * Time.deltaTime);
         }
 
     }

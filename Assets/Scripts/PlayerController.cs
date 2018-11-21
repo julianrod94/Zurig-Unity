@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
 		
 				SetInvulnerable(Time.timeScale > 1f);
 
-				var x = _axis.GetAxis(axisName) * Time.deltaTime * GameConstants.Player.Speed;
+				var x = _axis.GetAxis(axisName) * Time.deltaTime * GameConstants.Player.RotationSpeed;
 				_position.Translate(x,0);
 				return;
 		}

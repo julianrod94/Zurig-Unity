@@ -65,12 +65,12 @@ using UnityEngine;
 		
 		public void playBoostSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(spaceShipBoostSound, 0.5f);
+//			GetComponent<AudioSource>().PlayOneShot(spaceShipBoostSound, 0.5f);
 		}
 		
 		public void playShieldSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(shieldSound, 0.5f);
+//			GetComponent<AudioSource>().PlayOneShot(shieldSound, 0.5f);
 		}
 
 		public void playDesintegrationSound()

@@ -1296,7 +1296,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039457397155286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -13.363417, y: -51.082367, z: -240.07812}
   m_LocalScale: {x: 1, y: 1, z: 50}
   m_Children:
   - {fileID: 4353789670775126}
@@ -2880,6 +2880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shield: {fileID: 1300404387144438, guid: 639ebf5a8b3aa004c83e8ef9c15a5248, type: 2}
   boost: {fileID: 1774905630567344, guid: 31fdbdee503715847826288ae0fb5d96, type: 2}
+  key: {fileID: 1604237830914388, guid: b8ef1e332ac53684893cdf307452afd8, type: 2}
   MiddleCilinder: {fileID: 1665166696093594}
   halfCilinders:
   - {fileID: 1029242597520104}

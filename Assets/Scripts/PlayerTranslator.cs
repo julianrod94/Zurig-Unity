@@ -8,7 +8,6 @@ public class PlayerTranslator : MonoBehaviour {
 	public TurningZone zone;
 
 	private bool isRotating = false;
-	public float baseSpeed = 50;
 
 	private float targetRotation = 0;
 	private Vector3 targetPosition = Vector3.zero;
@@ -37,7 +36,7 @@ public class PlayerTranslator : MonoBehaviour {
 				isRotating = false;
 			}
 		} else {
-			var speed = baseSpeed;
+			var speed = GameConstants.Player.Speed;
 			if (Input.GetKey(KeyCode.W)) {
 				speed *= 2;
 			}

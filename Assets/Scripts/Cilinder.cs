@@ -8,6 +8,7 @@ public class Cilinder : MonoBehaviour {
 
 	public GameObject shield;
 	public GameObject boost;
+	public GameObject key;
 	
 	public GameObject MiddleCilinder;
 
@@ -29,21 +30,14 @@ public class Cilinder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Player = GameObject.FindWithTag("Player");
+		Player = GameManager.Instance.player;
 		foreach (var go in cilinderParts) {
 			if (Random.value > GameConstants.Cilinder.CilinderDensity) {
-				if (Random.value < GameConstants.Cilinder.CilinderShieldOdds) {
-					var instance = Instantiate(shield, go.spawner.transform);
-					instance.transform.parent = transform;
-					var lp = instance.transform.position;
-					instance.transform.localPosition = new Vector3(lp.x, lp.y, 5f);
-					instance.transform.localScale = Vector3.one*4;
-				} else if (Random.value < GameConstants.Cilinder.BoostOdds) {
-					var instance = Instantiate(boost, go.spawner.transform);
-					instance.transform.parent = transform;
-					var lp = instance.transform.position;
-					instance.transform.localPosition = new Vector3(lp.x, lp.y, 5f);
-					instance.transform.localScale = Vector3.one*4;
+				if (GameManager.Instance.totalKeys == 0 || Random.value < GameConstants.Cilinder.KeyOdds) {
+					Instantiate(key, go.spawner.transform.position, Quaternion.identity);
+					GameManager.Instance.totalKeys++;
+				} else if (Random.value < GameConstants.Cilinder.CilinderShieldOdds) {
+					Instantiate(shield, go.spawner.transform.position, Quaternion.identity);
 				}
 				go.gameObject.SetActive(false);
 			} 

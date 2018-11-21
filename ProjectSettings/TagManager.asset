@@ -11,6 +11,7 @@ TagManager:
   - Boost
   - Key
   - Wall
+  - Follow
   layers:
   - Default
   - TransparentFX

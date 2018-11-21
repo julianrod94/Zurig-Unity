@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/cilinder.unity
+    guid: 7eee10d9cb9e5fd44b69879b3c3a4cbe
   m_configObjects: {}

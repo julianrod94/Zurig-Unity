@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum GameState { Idle, Playing,Pause, Score }
@@ -13,8 +14,9 @@ public class GameManager: MonoBehaviour{
     private float _prevTS = 0;
     private GameState _prevState = GameState.Pause;
     public GameObject endCilinder;
-    private int keyParts = 0;
     
+    public int collectedKeys = 0;
+    public int totalKeys = 0;
 
     public static GameManager Instance;
 
@@ -47,6 +49,7 @@ public class GameManager: MonoBehaviour{
         explosion.Play();
         player.SetActive(false);
         shipAce.Stop();
+        SceneManager.LoadScene(0);
     }
 
     public void TogglePause() {
@@ -60,6 +63,6 @@ public class GameManager: MonoBehaviour{
 
     public void KeyObtained(GameObject key) {
         key.SetActive(false);
-        keyParts++;
+        collectedKeys++;
     }
 }

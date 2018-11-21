@@ -246,6 +246,10 @@ public class MazeGenerator: MonoBehaviour {
                             newPipe.transform.Translate(0,0,-50);
                         }
 
+                        if (value == Maze.MazePart.End) {
+                            GameManager.Instance.endCilinder = newPipe.GetComponent<FinishZone>();
+                        }
+
                         break;
 
                     case Maze.MazePart.Turning:

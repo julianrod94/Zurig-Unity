@@ -36,10 +36,10 @@ GameObject:
   - component: {fileID: 4671609008399064}
   - component: {fileID: 33875686027431970}
   - component: {fileID: 23700064998191636}
-  - component: {fileID: 135004735653888986}
+  - component: {fileID: 65722159429396432}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4651277552128922}
   - component: {fileID: 114410473709842762}
+  - component: {fileID: 114991088508691214}
   m_Layer: 0
   m_Name: GoalCillinder
   m_TagString: Untagged
@@ -102,7 +103,6 @@ GameObject:
   - component: {fileID: 4419326006079294}
   - component: {fileID: 65419896724912518}
   - component: {fileID: 54053064679736484}
-  - component: {fileID: 114730939633714866}
   m_Layer: 0
   m_Name: WinZone
   m_TagString: Untagged
@@ -157,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1408905861986044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 228.92648, y: 1538.4617, z: 635.8594}
+  m_LocalPosition: {x: 107.11724, y: 847.8965, z: 259.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4730206171787698}
@@ -304,6 +304,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 35, y: 35, z: 35}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65722159429396432
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055218549164676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 1.0000001, z: 1.8128967}
+  m_Center: {x: 0, y: -0.0000019073486, z: -0.40644836}
 --- !u!114 &114410473709842762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -317,26 +329,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i: 0
   j: 0
---- !u!114 &114730939633714866
+--- !u!114 &114991088508691214
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1436997927386438}
+  m_GameObject: {fileID: 1408905861986044}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2ce213bea734322ae2661ae58bcbf4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135004735653888986
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1055218549164676}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  Portal: {fileID: 1055218549164676}

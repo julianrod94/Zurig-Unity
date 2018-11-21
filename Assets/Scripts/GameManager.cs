@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
@@ -10,10 +11,11 @@ public class GameManager: MonoBehaviour{
     public GameState State = GameState.Idle;
     public GameObject player;
     public ParticleSystem shipAce;
+    private ParticleSystem _shipAce;
     public ParticleSystem explosion;
     private float _prevTS = 0;
     private GameState _prevState = GameState.Pause;
-    public GameObject endCilinder;
+    public FinishZone endCilinder;
     
     public int collectedKeys = 0;
     public int totalKeys = 0;
@@ -26,6 +28,7 @@ public class GameManager: MonoBehaviour{
         if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(this);
+            ResetValues();
         } else {
             Instance.ResetValues();
             Destroy(gameObject);
@@ -37,6 +40,7 @@ public class GameManager: MonoBehaviour{
         totalKeys = 0;
         endCilinder = null;
         player = null;
+        _shipAce = Instantiate(shipAce);
     }
     
     public void StartGame() {
@@ -45,18 +49,19 @@ public class GameManager: MonoBehaviour{
         shipAce.Play();
     }
 
-    public void NextLevel() {
-        
+    public void Restart() {
+        State = GameState.Idle;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     public void EndGame() {
         State = GameState.Score;
+        Instantiate(explosion, player.transform.position, Quaternion.identity);
         explosion.gameObject.SetActive(true);
         explosion.Stop();
         explosion.Play();
         player.SetActive(false);
-        shipAce.Stop();
-        SceneManager.LoadScene(0);
+        _shipAce.Stop();
     }
 
     public void TogglePause() {
@@ -69,7 +74,10 @@ public class GameManager: MonoBehaviour{
     }
 
     public void KeyObtained(GameObject key) {
-        key.SetActive(false);
+        Destroy(key);
         collectedKeys++;
+        if (collectedKeys == totalKeys) {
+            endCilinder.openPortal();
+        }
     }
 }

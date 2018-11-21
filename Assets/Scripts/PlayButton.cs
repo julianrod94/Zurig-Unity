@@ -7,4 +7,8 @@ public class PlayButton : MonoBehaviour {
 	public void startPlaying() {
 		GameManager.Instance.StartGame();
 	}
+	
+	public void Restart() {
+		GameManager.Instance.Restart();
+	}
 }

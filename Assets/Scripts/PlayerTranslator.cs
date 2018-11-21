@@ -73,6 +73,7 @@ public class PlayerTranslator : MonoBehaviour {
 		}
 
 		if (other.gameObject.CompareTag("Win")) {
+			AudioManager.Instance.playBoostSound();
 			GameManager.Instance.NextLevel();
 			return;
 		}

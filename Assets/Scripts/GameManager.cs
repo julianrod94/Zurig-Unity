@@ -56,7 +56,8 @@ public class GameManager: MonoBehaviour{
         shipAce.Play();
     }
 
-    public void Restart() {
+    public void Restart()
+    {
         State = GameState.Idle;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -82,6 +83,12 @@ public class GameManager: MonoBehaviour{
     }
 
     public void NextLevel() {
+        Invoke( "NextLevelDelayed", 2.0f );
+        
+    }
+
+    private void NextLevelDelayed()
+    {
         Level++;
         Restart();
     }

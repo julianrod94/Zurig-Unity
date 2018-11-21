@@ -15287,6 +15287,8 @@ MonoBehaviour:
   shipAce: {fileID: 594094566}
   explosion: {fileID: 766729478}
   endCilinder: {fileID: 0}
+  collectedKeys: 0
+  totalKeys: 0
 --- !u!4 &1770798935
 Transform:
   m_ObjectHideFlags: 0

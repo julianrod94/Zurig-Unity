@@ -7,7 +7,19 @@ public class CanvasManager : MonoBehaviour {
 	public Canvas Game;
 	public Canvas EndGame;
 	public Canvas Pause;
-	public Text keysText;
+	
+	private Text keysText;
+	private Text finalScore;
+
+	private void Start()
+	{
+		Transform child =  Game.gameObject.transform.Find("Keys");
+		keysText = child.GetComponent<Text>();
+		
+		child = EndGame.gameObject.transform.Find("FinalScore");
+		finalScore = child.GetComponent<Text>();
+	}
+
 
 	void Awake() {
 		DisableAll();	
@@ -35,6 +47,7 @@ public class CanvasManager : MonoBehaviour {
 				if (!EndGame.gameObject.activeSelf) {
 					DisableAll();
 					EndGame.gameObject.SetActive(true);
+					showFinalScore();
 				}
 				break;
 			
@@ -62,5 +75,10 @@ public class CanvasManager : MonoBehaviour {
 	public void updateKeyCanvas()
 	{
 		keysText.text = "Keys: " + GameManager.Instance.collectedKeys.ToString() +"/"+ GameManager.Instance.totalKeys.ToString();
+	}
+
+	public void showFinalScore()
+	{
+		finalScore.text = GameManager.Instance.collectedKeys.ToString() + "/" + GameManager.Instance.totalKeys.ToString() + " keys";
 	}
 }

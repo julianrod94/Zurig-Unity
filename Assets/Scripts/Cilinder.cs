@@ -64,36 +64,10 @@ public class Cilinder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameManager.Instance.State != GameState.Playing && GameManager.Instance.State != GameState.Pause) {
-			Destroy(gameObject);
-			return;
-		}
-		
-		transform.Translate(0,0,-GameConstants.Cilinder.Speed * Time.deltaTime);
-
-		if (transform.position.z < Player.transform.position.z) {
-			startFading();
-		}
-		
-		if (transform.position.z - Player.transform.position.z < 0.05 ) {
-			AudioManager.Instance.playFlyOverCilinderSound();
-		}
-
-		if (_isFading) {
-			foreach(var render in renderers) {
-				if (render.material.color.a.Equals(1)) {
-					StandardShaderUtils.ChangeRenderMode(render.material, StandardShaderUtils.BlendMode.Transparent);
-				}
-				
-				var materialColor = render.material.color;
-				materialColor.a = render.material.color.a - 3*Time.deltaTime;
-				render.material.color = materialColor;
-
-				if (materialColor.a <= 0) {
-					Destroy(gameObject);
-				}
-			}
-		}
+		//TODO See if there is an option to do this
+//		if (transform.position.z - Player.transform.position.z < 0.05 ) {
+//			AudioManager.Instance.playFlyOverCilinderSound();
+//		}
 	}
 	
 	public void Explode()
@@ -103,7 +77,4 @@ public class Cilinder : MonoBehaviour {
 		_isFading = true;
 	}
 
-	private void startFading() {
-		_isFading = true;
-	}
 }

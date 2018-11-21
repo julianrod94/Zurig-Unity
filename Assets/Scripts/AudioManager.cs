@@ -60,7 +60,7 @@ using UnityEngine;
 
 		public void playJumpSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(spaceShipJumpSound, 0.6f);
+//			GetComponent<AudioSource>().PlayOneShot(spaceShipJumpSound, 0.6f);
 		}
 		
 		public void playBoostSound()

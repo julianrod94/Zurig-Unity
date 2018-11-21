@@ -5554,6 +5554,7 @@ MonoBehaviour:
   Game: {fileID: 1527853331}
   EndGame: {fileID: 787107578}
   Pause: {fileID: 2042021684}
+  keysText: {fileID: 1686763835}
 --- !u!1 &1527853328
 GameObject:
   m_ObjectHideFlags: 0
@@ -5970,7 +5971,6 @@ MonoBehaviour:
   collectedKeys: 0
   totalKeys: 0
   Level: 0
-  keysText: {fileID: 1686763835}
 --- !u!4 &1770798935
 Transform:
   m_ObjectHideFlags: 0

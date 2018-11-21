@@ -20,7 +20,6 @@ public class GameManager: MonoBehaviour{
     public int totalKeys = 0;
 
     public int Level = 1;
-    public Text keysText;
 
     public static GameManager Instance;
 
@@ -45,12 +44,6 @@ public class GameManager: MonoBehaviour{
     
     private void Update() {
 //       if (keyParts > 0) OpenDoor();
-        updateKeyCanvas();
-    }
-
-    public void updateKeyCanvas()
-    {
-        keysText.text = "Keys: " + collectedKeys.ToString() +"/"+ totalKeys.ToString();
     }
     
     public void StartGame() {

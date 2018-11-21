@@ -9,6 +9,7 @@ public class CanvasManager : MonoBehaviour {
 	public Canvas Game;
 	public Canvas EndGame;
 	public Canvas Pause;
+	public Text keysText;
 
 //	private float _initialTime = GameManager.Instance.Time;
 
@@ -29,6 +30,7 @@ public class CanvasManager : MonoBehaviour {
 			case GameState.Playing:
 				if (!Game.gameObject.activeSelf) {
 					DisableAll();
+					updateKeyCanvas();
 					Game.gameObject.SetActive(true);
 				}
 				break;
@@ -61,5 +63,10 @@ public class CanvasManager : MonoBehaviour {
 		Game.gameObject.SetActive(false);
 		EndGame.gameObject.SetActive(false);
 		Pause.gameObject.SetActive(false);
+	}
+	
+	public void updateKeyCanvas()
+	{
+		keysText.text = "Keys: " + GameManager.Instance.collectedKeys.ToString() +"/"+ GameManager.Instance.totalKeys.ToString();
 	}
 }

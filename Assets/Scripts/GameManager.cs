@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -17,10 +14,13 @@ public class GameManager: MonoBehaviour{
     private GameState _prevState = GameState.Pause;
     public FinishZone endCilinder;
     
+    [SerializeField]
     public int collectedKeys = 0;
+    [SerializeField]
     public int totalKeys = 0;
 
     public int Level = 1;
+    public Text keysText;
 
     public static GameManager Instance;
 
@@ -41,6 +41,16 @@ public class GameManager: MonoBehaviour{
         endCilinder = null;
         player = null;
         _shipAce = Instantiate(shipAce);
+    }
+    
+    private void Update() {
+//       if (keyParts > 0) OpenDoor();
+        updateKeyCanvas();
+    }
+
+    public void updateKeyCanvas()
+    {
+        keysText.text = "Keys: " + collectedKeys.ToString() +"/"+ totalKeys.ToString();
     }
     
     public void StartGame() {

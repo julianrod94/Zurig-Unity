@@ -69,8 +69,16 @@ public class PlayerTranslator : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.gameObject.CompareTag("Key")) GameManager.Instance.KeyObtained(other.gameObject);
+		if (other.gameObject.CompareTag("Key")) {
+			GameManager.Instance.KeyObtained(other.gameObject);
+			return;
+		}
 
+		if (other.gameObject.CompareTag("Win")) {
+			GameManager.Instance.NextLevel();
+			return;
+		}
+	
 		var turningZone = other.GetComponentInParent<TurningZone>();
 		if (turningZone != null) {
 			zone = turningZone;

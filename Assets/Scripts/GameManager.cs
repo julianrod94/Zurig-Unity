@@ -73,6 +73,11 @@ public class GameManager: MonoBehaviour{
         _prevTS = tempTS;
     }
 
+    public void NextLevel() {
+        Level++;
+        Restart();
+    }
+
     public void KeyObtained(GameObject key) {
         Destroy(key);
         collectedKeys++;

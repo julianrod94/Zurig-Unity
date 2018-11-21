@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class GameManager: MonoBehaviour{
 
     public int Level = 1;
 
+    public bool portalIsOpened = false;
+
     public static GameManager Instance;
 
     private void Awake() {
@@ -40,6 +43,7 @@ public class GameManager: MonoBehaviour{
         endCilinder = null;
         player = null;
         _shipAce = Instantiate(shipAce);
+        portalIsOpened = false;
     }
     
     private void Update() {
@@ -84,7 +88,9 @@ public class GameManager: MonoBehaviour{
     public void KeyObtained(GameObject key) {
         Destroy(key);
         collectedKeys++;
-        if (collectedKeys == totalKeys) {
+        if (collectedKeys == totalKeys)
+        {
+            portalIsOpened = true;
             endCilinder.openPortal();
         }
     }

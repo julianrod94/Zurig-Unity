@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour {
 	public void OnTriggerEnter(Collider other) {
 		Debug.Log(other.gameObject.tag);
 		if (other.gameObject.CompareTag("Wall")) {
+			AudioManager.Instance.playExplosionSound();
 			GameManager.Instance.EndGame();
 		}
 	}
@@ -73,6 +74,8 @@ public class PlayerController : MonoBehaviour {
 		var cilinder = other.gameObject.GetComponentInParent<Cilinder>();
 		if (other.gameObject.CompareTag("Cilinder")) {	
 			if(cilinder.hasBeenHit) { return; }
+			
+			AudioManager.Instance.playExplosionSound();
 
 			cilinder.hasBeenHit = true;
 

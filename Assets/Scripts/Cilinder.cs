@@ -66,7 +66,6 @@ public class Cilinder : MonoBehaviour {
 	
 	public void Explode()
 	{
-		AudioManager.Instance.playBrokenCilinderSound();
  		GetComponent<Animator>().SetTrigger("Explode");
 		_isFading = true;
 	}

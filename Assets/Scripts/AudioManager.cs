@@ -48,7 +48,7 @@ using UnityEngine;
 			_instance = this;
 		}
 
-		public void playBrokenCilinderSound()
+		public void playExplosionSound()
 		{
 			GetComponent<AudioSource>().PlayOneShot(brokenCilinderSound, 1f);
 		}

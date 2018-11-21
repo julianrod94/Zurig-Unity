@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour {
@@ -10,8 +8,6 @@ public class CanvasManager : MonoBehaviour {
 	public Canvas EndGame;
 	public Canvas Pause;
 	public Text keysText;
-
-//	private float _initialTime = GameManager.Instance.Time;
 
 	void Awake() {
 		DisableAll();	
@@ -30,9 +26,9 @@ public class CanvasManager : MonoBehaviour {
 			case GameState.Playing:
 				if (!Game.gameObject.activeSelf) {
 					DisableAll();
-					updateKeyCanvas();
 					Game.gameObject.SetActive(true);
 				}
+				updateKeyCanvas();
 				break;
 			
 			case GameState.Score:
@@ -52,8 +48,6 @@ public class CanvasManager : MonoBehaviour {
 	}
 
 	public void PlayGame() {
-//		GameManager.Instance.Time = _initialTime;
-//		ScoreManager.Instance.P1Score = 0;
 		GameManager.Instance.State = GameState.Playing;
 		AudioManager.Instance.playMainTheme();
 	}

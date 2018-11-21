@@ -255,7 +255,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0 km
+  m_Text: x / x keys
 --- !u!222 &232742319
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5498,7 +5498,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You travelled:'
+  m_Text: 'You collected:'
 --- !u!222 &1469276272
 CanvasRenderer:
   m_ObjectHideFlags: 0

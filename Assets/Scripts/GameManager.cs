@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum GameState { Idle, Playing,Pause, Score }
+public enum GameState { Idle, Playing,Pause, Score}
 public class GameManager: MonoBehaviour{
     
     public GameState State = GameState.Idle;

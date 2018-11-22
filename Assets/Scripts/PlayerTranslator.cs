@@ -11,8 +11,11 @@ public class PlayerTranslator : MonoBehaviour {
 
 	private PlayerController controller;
 
+	private bool _boosting = false;
+
 	private void Awake() {
 		controller = GetComponentInChildren<PlayerController>();
+		_boosting = false;
 	}
 
 	private void Start() {
@@ -36,6 +39,10 @@ public class PlayerTranslator : MonoBehaviour {
 			var speed = GameConstants.Player.Speed;
 			if (Input.GetKey(KeyCode.W)) {
 				speed *= 2;
+			}
+
+			if (_boosting) {
+				speed *= 10;
 			}
 			transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
@@ -74,6 +81,8 @@ public class PlayerTranslator : MonoBehaviour {
 
 		if (other.gameObject.CompareTag("Win")) {
 			AudioManager.Instance.playBoostSound();
+			_boosting = true;
+			GetComponentInChildren<CapsuleCollider>().enabled = false;
 			GameManager.Instance.NextLevel();
 			return;
 		}

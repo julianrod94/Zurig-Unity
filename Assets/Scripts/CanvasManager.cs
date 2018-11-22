@@ -8,23 +8,11 @@ public class CanvasManager : MonoBehaviour {
 	public Canvas EndGame;
 	public Canvas Pause;
 	
-	private Text keysText;
-	private Text finalScore;
-	private Text openedPortalText;
-
-	private void Start()
-	{
-		Transform child =  Game.gameObject.transform.Find("KeysText");
-		keysText = child.GetComponent<Text>();
-		
-		child = EndGame.gameObject.transform.Find("FinalScore");
-		finalScore = child.GetComponent<Text>();
-		
-		child =  Game.gameObject.transform.Find("OpenedPortalText");
-		openedPortalText = child.GetComponent<Text>();
-	}
-
-
+	public Text keysText;
+	public Text finalScore;
+	public Text openedPortalText;
+	public Text LevelText;
+	
 	void Awake() {
 		DisableAll();	
 	}
@@ -88,12 +76,13 @@ public class CanvasManager : MonoBehaviour {
 	private void updateKeyCanvas()
 	{
 		openedPortalText.enabled = false;
-		keysText.text = "Keys: " + GameManager.Instance.collectedKeys.ToString() +"/"+ GameManager.Instance.totalKeys.ToString();
+		keysText.text = "Keys: " + GameManager.Instance.collectedKeys +"/"+ GameManager.Instance.totalKeys;
+		LevelText.text = "Level " + GameManager.Instance.Level;
 	}
 
 	private void showFinalScore()
 	{
-		finalScore.text = GameManager.Instance.collectedKeys.ToString() + "/" + GameManager.Instance.totalKeys.ToString() + " keys";
+		finalScore.text = GameManager.Instance.collectedKeys + "/" + GameManager.Instance.totalKeys + " keys";
 	}
 
 	private void showOpenedPortalText()

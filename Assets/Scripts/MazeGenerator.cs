@@ -13,7 +13,7 @@ public class MazeGenerator: MonoBehaviour {
     public GameObject turningZone;
 
     private void Awake() {
-        GeneratedMaze = GenerateMaze(4 + GameManager.Instance.Level * 2);
+        GeneratedMaze = GenerateMaze(2 + GameManager.Instance.Level * 2);
         InstantiateMaze(GeneratedMaze);
     }
 

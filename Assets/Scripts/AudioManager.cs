@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 	public class AudioManager : MonoBehaviour
@@ -26,16 +27,30 @@ using UnityEngine;
 		private AudioClip portalOpenedSound;
 
 		private AudioSource mainThemeLoop;
+		private AudioSource secondaryLoop;
 		
 		private bool isPlayingMainLoop = false;
 
-		private void Start() {
-			mainThemeLoop = GetComponent<AudioSource>();
-			mainThemeLoop.loop = true;
-			mainThemeLoop.clip = mainTheme;
-			mainThemeLoop.volume = 0.3f;
-			
-			playMainTheme();
+		private void Awake() {
+			if (_instance == null) {
+				_instance = this;
+				var sources = GetComponents<AudioSource>();
+				mainThemeLoop = sources.First();
+				secondaryLoop = sources.Last();
+
+				secondaryLoop.loop = true;
+				secondaryLoop.volume = 0.2f;
+
+				mainThemeLoop.loop = true;
+				mainThemeLoop.clip = mainTheme;
+				mainThemeLoop.volume = 0.3f;
+
+				playMainTheme();
+				DontDestroyOnLoad(this);
+			} else {
+				_instance.secondaryLoop.Stop();
+				Destroy(this);
+			}
 		}
 		
 		private static AudioManager _instance = null;
@@ -46,57 +61,50 @@ using UnityEngine;
 			private set { _instance = value; }
 		}
 
-		// Use this for initialization
-		void Awake()
-		{
-			_instance = this;
-		}
-
 		public void playExplosionSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(brokenCilinderSound, 1f);
+			mainThemeLoop.PlayOneShot(brokenCilinderSound, 1f);
 		}
 		
 		public void playFlyOverCilinderSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(spaceShipTroughCilinderSound, 0.05f);
+			mainThemeLoop.PlayOneShot(spaceShipTroughCilinderSound, 0.05f);
 		}
 
 		public void playJumpSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(spaceShipJumpSound, 0.6f);
+			mainThemeLoop.PlayOneShot(spaceShipJumpSound, 0.6f);
 		}
 		
 		public void playBoostSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(spaceShipBoostSound, 0.5f);
+			mainThemeLoop.PlayOneShot(spaceShipBoostSound, 0.5f);
 		}
 		
 		public void playShieldSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(shieldSound, 0.5f);
+			mainThemeLoop.PlayOneShot(shieldSound, 0.5f);
 		}
 
 		public void playDesintegrationSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(spaceShipDesintegrationSound, 1f);
+			mainThemeLoop.PlayOneShot(spaceShipDesintegrationSound, 1f);
 		}
 		
 		public void playButtonSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(buttonSound, 1f);	
+			mainThemeLoop.PlayOneShot(buttonSound, 1f);	
 		}
 		
 		public void playPickUpKeySound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(pickUpKeySound, 1f);	
+			mainThemeLoop.PlayOneShot(pickUpKeySound, 1f);	
 		}
 		
 		public void playPortalOpenedSound()
 		{
-			stopMainTheme();
-			mainThemeLoop.clip = portalOpenedSound;
-			playMainTheme();	
+			secondaryLoop.clip = portalOpenedSound;
+			secondaryLoop.Play();
 		}
 		
 		public void playMainTheme()

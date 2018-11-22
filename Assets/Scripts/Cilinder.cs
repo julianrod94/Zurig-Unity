@@ -66,8 +66,8 @@ public class Cilinder : MonoBehaviour {
 	
 	public void Explode()
 	{
- 		GetComponent<Animator>().SetTrigger("Explode");
-		_isFading = true;
+// 		GetComponent<Animator>().SetTrigger("Explode");
+//		_isFading = true;
 	}
 
 }
